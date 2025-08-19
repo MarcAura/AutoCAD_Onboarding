@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AutoCAD LT Interactive Onboarding & Layouts Tutorial</title>
+  <style>
+    :root {
+      --bg: #0b1120;
+      --panel: #111827;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #60a5fa;
+      --accent-2: #34d399;
+      --border: #1f2937;
+      --code: #111827;
+    }
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #2563eb;
+      --accent-2: #059669;
+      --border: #e2e8f0;
+      --code: #0b1220;
+    }
+    html, body { height:100%; }
+    body {
+      margin:0; background:var(--bg); color:var(--text);
+      font: 15px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+    .app { display:grid; grid-template-columns: 280px 1fr; min-height:100vh; }
+    nav {
+      background: var(--panel);
+      border-right: 1px solid var(--border);
+      padding: 18px 14px; position: sticky; top:0; height:100vh; overflow:auto;
+    }
+    nav h1 { font-size: 16px; margin: 0 0 10px; letter-spacing: 0.2px; }
+    .search { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
+    .search input {
+      width:100%; padding:8px 10px; border-radius: 8px; border:1px solid var(--border);
+      background: transparent; color: var(--text);
+    }
+    .nav-list { list-style:none; margin:10px 0 0; padding:0; display:flex; flex-direction:column; gap:6px; }
+    .nav-list a{
+      display:block; padding:8px 10px; border-radius:8px; color:var(--text); text-decoration:none; border:1px solid transparent;
+    }
+    .nav-list a:hover, .nav-list a.active{ background:rgba(96,165,250,.12); border-color:var(--border); }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:10px; border:1px solid var(--border); background:var(--panel); color:var(--text); cursor:pointer; }
+    .btn.primary { background: linear-gradient(180deg, var(--accent), #1d4ed8); border-color:#1d4ed8; color:white; }
+    .btn.ghost { background:transparent; }
+    .pill { padding:4px 8px; border-radius:999px; border:1px solid var(--border); font-size:12px; color:var(--muted); }
+    main { padding: 24px 28px; }
+    .header { display:flex; align-items:center; gap:12px; justify-content:space-between; margin-bottom:18px; }
+    .left { display:flex; align-items:center; gap:12px; }
+    .toggle-wrap { display:flex; gap:8px; align-items:center; }
+    .card { background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:16px 18px; margin:14px 0; }
+    h2 { margin: 22px 0 10px; font-size:20px; }
+    h3 { margin: 18px 0 8px; font-size:16px; }
+    details { border:1px dashed var(--border); border-radius:12px; padding:10px 12px; background: transparent; }
+    details + details{ margin-top:10px; }
+    details summary { cursor:pointer; color:var(--text); font-weight:600; }
+    code, kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; background: var(--panel); color: var(--text); padding:2px 6px; border-radius:6px; border:1px solid var(--border); }
+    pre { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:14px; overflow:auto; }
+    .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .flex { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .muted { color:var(--muted); }
+    .copy { cursor:pointer; font-size:12px; border:none; background:transparent; color:var(--accent); }
+    .tip { border-left:3px solid var(--accent); padding-left:10px; color:var(--muted); }
+    .checklist li { margin:6px 0; }
+    .checklist input { transform: translateY(1px); }
+    .version-toggle { display:flex; gap:6px; }
+    .kbd { border:1px solid var(--border); padding:2px 6px; border-radius:6px; background: var(--panel); }
+    .right-actions{ display:flex; gap:8px; flex-wrap:wrap; }
+
+    /* Print-friendly */
+    @media print {
+      nav { display:none; }
+      .app { grid-template-columns: 1fr; }
+      .btn, .right-actions { display:none !important; }
+      body { background:white; color:black; }
+      .card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app" id="app">
+    <nav>
+      <h1>AutoCAD LT Tutorial</h1>
+      <div class="search">
+        <input id="search" placeholder="Search steps…" aria-label="Search" />
+      </div>
+      <ul class="nav-list" id="nav">
+        <li><a href="#quickstart" class="active">Quick Start</a></li>
+        <li><a href="#onboarding">Onboarding</a></li>
+        <li><a href="#etransmit">eTransmit</a></li>
+        <li><a href="#layers">Layer Manager</a></li>
+        <li><a href="#layer-states">Layer States</a></li>
+        <li><a href="#layouts">Layouts</a></li>
+        <li><a href="#block-editor">Block Editor</a></li>
+        <li><a href="#attributes">Attributes</a></li>
+        <li><a href="#title-block">Title Block + Attr</a></li>
+        <li><a href="#sheet-set">Sheet Set Manager</a></li>
+        <li><a href="#appendix-a">Appendix A (Rev)</a></li>
+        <li><a href="#appendix-b">Appendix B (Layer States)</a></li>
+        <li><a href="#appendix-c">Appendix C (Worked)</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <div class="header">
+        <div class="left">
+          <span class="pill">2019 ↔ 2026 Compatible</span>
+        </div>
+        <div class="right-actions">
+          <div class="toggle-wrap">
+            <span class="muted">Theme</span>
+            <button class="btn" id="toggleTheme" aria-pressed="false">Toggle Dark/Light</button>
+          </div>
+          <div class="toggle-wrap">
+            <span class="muted">Version filter</span>
+            <div class="version-toggle" role="group" aria-label="Version filter">
+              <button class="btn pill" data-ver="all" aria-pressed="true">All</button>
+              <button class="btn pill" data-ver="2019">LT 2019</button>
+              <button class="btn pill" data-ver="2026">LT 2026</button>
+            </div>
+          </div>
+          <button class="btn" id="expandAll">Expand All</button>
+          <button class="btn ghost" id="collapseAll">Collapse All</button>
+        </div>
+      </div>
+
+      <!-- QUICK START -->
+      <section id="quickstart" class="card" data-title="quick start">
+        <h2>Quick Start (Most-Used Actions)</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Update REV on All Sheets</h3>
+            <ol>
+              <li><strong>Preferred:</strong> <code>Sheet Set Manager</code> → Sheet Set <em>Properties</em> → Change <code>CurrentSheetRevision</code> → <code>REGENALL</code>.</li>
+              <li><strong>Basic:</strong> <code>ATTEDIT</code> REV on each sheet → <code>ATTSYNC</code>.</li>
+            </ol>
+            <button class="copy" data-copy="SHEETSET">Copy command: SHEETSET</button>
+            <button class="copy" data-copy="ATTSYNC">Copy command: ATTSYNC</button>
+          </div>
+          <div class="card">
+            <h3>Switch Layer Set for a Layout</h3>
+            <ol>
+              <li>Activate viewport (double-click inside).</li>
+              <li>Run <code>LAYERSTATE</code> → choose saved state (e.g., <em>SILVER_TRACES_LAYOUT</em>).</li>
+            </ol>
+            <button class="copy" data-copy="LAYERSTATE">Copy command: LAYERSTATE</button>
+          </div>
+          <div class="card">
+            <h3>Publish All Layouts → PDF</h3>
+            <ol>
+              <li>Run <code>PUBLISH</code> → select layouts → output to single PDF.</li>
+            </ol>
+            <button class="copy" data-copy="PUBLISH">Copy command: PUBLISH</button>
+          </div>
+        </div>
+        <p class="tip">Tip: Toggle on-screen lineweights with <kbd class="kbd">LWDISPLAY</kbd> → <kbd class="kbd">ON</kbd>. Toggle OSNAP with <kbd class="kbd">F3</kbd>; grid snap with <kbd class="kbd">F9</kbd>.</p>
+      </section>
+
+      <!-- ONBOARDING -->
+      <section id="onboarding" class="card" data-title="onboarding">
+        <h2>Onboarding Essentials</h2>
+        <p class="muted">Install fonts (TTF/OTF), copy SHX/CTB, set default template, then restart AutoCAD.</p>
+        <div class="grid">
+          <div class="card">
+            <h3>Paths (copy)</h3>
+            <ul>
+              <li>Plot Styles (CTB) 2019 → <code>C:\Users\&lt;User&gt;\AppData\Roaming\Autodesk\AutoCAD LT 2019\enu\Plotters\Plot Styles</code> <button class="copy" data-copy="C:\\Users\\&lt;User&gt;\\AppData\\Roaming\\Autodesk\\AutoCAD LT 2019\\enu\\Plotters\\Plot Styles">Copy</button></li>
+              <li>Plot Styles (CTB) 2026 → <code>C:\Users\&lt;User&gt;\AppData\Roaming\Autodesk\AutoCAD LT 2026\R32\enu\Plotters\Plot Styles</code> <button class="copy" data-copy="C:\\Users\\&lt;User&gt;\\AppData\\Roaming\\Autodesk\\AutoCAD LT 2026\\R32\\enu\\Plotters\\Plot Styles">Copy</button></li>
+              <li>AutoCAD SHX → <code>C:\Program Files\Autodesk\AutoCAD LT 20XX\Fonts</code> <button class="copy" data-copy="C:\\Program Files\\Autodesk\\AutoCAD LT 20XX\\Fonts">Copy</button></li>
+              <li>Windows Fonts → <code>C:\Windows\Fonts</code> <button class="copy" data-copy="C:\\Windows\\Fonts">Copy</button></li>
+              <li>Templates 2026 → <code>C:\Users\&lt;User&gt;\AppData\Local\Autodesk\AutoCAD LT 2026\R32\enu\Template</code> <button class="copy" data-copy="C:\\Users\\&lt;User&gt;\\AppData\\Local\\Autodesk\\AutoCAD LT 2026\\R32\\enu\\Template">Copy</button></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Font Install Checklist</h3>
+            <ul class="checklist" id="fontCheck">
+              <li><label><input type="checkbox"> Install Futura Bk BT (.ttf)</label></li>
+              <li><label><input type="checkbox"> Install Futura Md BT (.ttf)</label></li>
+              <li><label><input type="checkbox"> Install TT0200M/01M/02M (.ttf/.shx)</label></li>
+              <li><label><input type="checkbox"> Copy SHX into AutoCAD Fonts</label></li>
+              <li><label><input type="checkbox"> Restart AutoCAD</label></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ETRANSMIT -->
+      <section id="etransmit" class="card" data-title="etransmit">
+        <h2>eTransmit (Full Package)</h2>
+        <details open>
+          <summary>Transmitter Checklist (every time)</summary>
+          <ol>
+            <li>Open DWG in <span data-ver-only="2019">LT 2019</span><span data-ver-only="2026">LT 2026</span>.</li>
+            <li>Run <code>ETRANSMIT</code> → <em>Transmittal Setups…</em> → select <strong>Full_Transmit_With_Fonts</strong>.</li>
+            <li>Ensure options: Include <strong>fonts</strong>, <strong>plot styles</strong>, <strong>Xrefs</strong>, <strong>raster</strong>, <strong>materials</strong>, <strong>data links</strong>.</li>
+            <li>Format: <strong>AutoCAD 2018 DWG</strong>; Output: <strong>ZIP</strong>; Path: <em>one folder</em>; Xrefs: <strong>Bind</strong>.</li>
+            <li>Generate ZIP and send.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Receiver Checklist</summary>
+          <ol>
+            <li>Extract ZIP.</li>
+            <li>Install any <code>.ttf/.otf</code> (right‑click → <em>Install for all users</em>).</li>
+            <li>Copy <code>.ctb</code> to your Plot Styles path (see Onboarding paths).</li>
+            <li>Open DWG from the extracted folder.</li>
+          </ol>
+        </details>
+      </section>
+
+      <!-- LAYERS -->
+      <section id="layers" class="card" data-title="layers">
+        <h2>Layer Manager</h2>
+        <p>Organize geometry into named layers that control color, linetype, lineweight, and plot behavior.</p>
+        <div class="grid">
+          <div class="card">
+            <h3>Common Layers</h3>
+            <ul>
+              <li><strong>TRACES</strong> — black, 5 mil</li>
+              <li><strong>FIDUCIALS</strong> — red, thin</li>
+              <li><strong>ADHESIVE</strong> — grey, thin</li>
+              <li><strong>NOTES</strong> — light or non-plot</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Commands</h3>
+            <p><button class="copy" data-copy="LAYER">Copy: LAYER</button> <span class="muted">open Layer Properties</span></p>
+            <p><button class="copy" data-copy="MATCHPROP">Copy: MATCHPROP</button> <span class="muted">remap objects to layer styles</span></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- LAYER STATES -->
+      <section id="layer-states" class="card" data-title="layer states">
+        <h2>Layer States (Saved Configurations)</h2>
+        <p>Save/restore a snapshot of layer visibility, freeze/thaw, colors, and lineweights. Use one-click presets like “Silver Traces Layout”.</p>
+        <details open>
+          <summary>Create a Layer State</summary>
+          <ol>
+            <li>Set layers as desired (On/Off, Freeze/Thaw, etc.).</li>
+            <li>Run <code>LAYERSTATE</code> → <em>New</em> → name it (e.g., <em>SILVER_TRACES_LAYOUT</em>).</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Restore per Viewport</summary>
+          <ol>
+            <li>Activate a viewport (double-click inside).</li>
+            <li>Run <code>LAYERSTATE</code> → select preset → <em>Restore</em>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Export/Import .LAS</summary>
+          <p>Use <code>LAYERSTATE</code> → <em>Export/Import</em> to share presets across drawings.</p>
+        </details>
+      </section>
+
+      <!-- LAYOUTS -->
+      <section id="layouts" class="card" data-title="layouts">
+        <h2>Layouts (Paper Space)</h2>
+        <ol>
+          <li>Switch to a Layout tab.</li>
+          <li>Insert Title Block.</li>
+          <li>Create viewport (<code>MV</code>) and set scale.</li>
+          <li>Restore the correct <strong>Layer State</strong> inside the viewport.</li>
+        </ol>
+        <p class="tip">Each Layout becomes a page in the final PDF. Use different presets per Layout.</p>
+      </section>
+
+      <!-- BLOCK EDITOR -->
+      <section id="block-editor" class="card" data-title="block editor">
+        <h2>Block Editor (BEDIT)</h2>
+        <p>Edit reusable blocks (title block, symbols) in isolation and update all instances at once.</p>
+        <ol>
+          <li>Run <code>BEDIT</code> → choose block (e.g., <em>TITLE_BLOCK</em>).</li>
+          <li>Add/modify geometry, insert attributes, or place fields.</li>
+          <li>Save & Close → <code>ATTSYNC</code> to refresh placed blocks.</li>
+        </ol>
+      </section>
+
+      <!-- ATTRIBUTES -->
+      <section id="attributes" class="card" data-title="attributes">
+        <h2>Attributes</h2>
+        <p>Attributes are editable text fields inside a block (e.g., REV, PROJECT, DRAWN_BY).</p>
+        <ol>
+          <li>Create with <code>ATTDEF</code> (Tag/Prompt/Default).</li>
+          <li>Edit with <code>ATTEDIT</code> or Enhanced Attribute Editor (EATTEDIT).</li>
+          <li>Sync after changes with <code>ATTSYNC</code>.</li>
+        </ol>
+      </section>
+
+      <!-- TITLE BLOCK + ATTR -->
+      <section id="title-block" class="card" data-title="title block">
+        <h2>Title Block with Attributes</h2>
+        <ol>
+          <li>Draw border/boxes/logo in Paper Space.</li>
+          <li>Create attributes: REV, PROJECT, DATE, DRAWN_BY via <code>ATTDEF</code>.</li>
+          <li>Select all → <code>BLOCK</code> → name <em>TITLE_BLOCK</em>.</li>
+          <li>Insert into each Layout and fill fields.</li>
+        </ol>
+      </section>
+
+      <!-- SHEET SET MANAGER -->
+      <section id="sheet-set" class="card" data-title="sheet set manager">
+        <h2>Sheet Set Manager (Advanced)</h2>
+        <p>Manage multiple Layouts as one project and drive common fields like REV from a single place.</p>
+        <details open>
+          <summary>Setup</summary>
+          <ol>
+            <li>Run <code>SHEETSET</code> → create new Sheet Set.</li>
+            <li>Add drawing Layouts.</li>
+            <li>Link title block attributes to fields (e.g., <em>CurrentSheetRevision</em>).</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Update REV (Preferred)</summary>
+          <ol>
+            <li>Sheet Set <em>Properties</em> → change <code>CurrentSheetRevision</code>.</li>
+            <li><code>REGENALL</code> → publish.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Link REV Attribute to Sheet Set (one-time)</summary>
+          <ol>
+            <li><code>BEDIT</code> the title block → select REV attribute.</li>
+            <li>Insert Field → Category: <em>SheetSet</em> → Field: <em>CurrentSheetRevision</em>.</li>
+            <li>Save & Close → <code>ATTSYNC</code> all instances.</li>
+          </ol>
+        </details>
+      </section>
+
+      <!-- APPENDIX A -->
+      <section id="appendix-a" class="card" data-title="appendix a rev">
+        <h2>Appendix A — Update Revision A → C</h2>
+        <details open>
+          <summary>Method 1: Attributes (Basic)</summary>
+          <ol>
+            <li><code>ATTEDIT</code> → edit REV on each Layout.</li>
+            <li><code>ATTSYNC</code> to refresh.</li>
+            <li><code>PUBLISH</code> to PDF.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Method 2: Sheet Set (Preferred)</summary>
+          <ol>
+            <li><code>SHEETSET</code> → Sheet Set <em>Properties</em> → set <strong>A → C</strong>.</li>
+            <li><code>REGENALL</code> → <code>PUBLISH</code>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Setup: Link REV to Sheet Set (one-time)</summary>
+          <ol>
+            <li><code>BEDIT</code> title block → select REV attribute.</li>
+            <li>Insert Field → <em>SheetSet</em> → <em>CurrentSheetRevision</em>.</li>
+            <li>Save & Close → <code>ATTSYNC</code>.</li>
+          </ol>
+        </details>
+      </section>
+
+      <!-- APPENDIX B -->
+      <section id="appendix-b" class="card" data-title="appendix b layer states">
+        <h2>Appendix B — Layer States Management</h2>
+        <p>Presets for common configurations like Silver Traces, Adhesive, Final Assembly.</p>
+        <ol>
+          <li>Set layers → <code>LAYERSTATE</code> → <em>New</em> → name.</li>
+          <li>Activate a viewport → restore preset.</li>
+          <li>Export/Import <code>.LAS</code> to share across drawings.</li>
+        </ol>
+      </section>
+
+      <!-- APPENDIX C -->
+      <section id="appendix-c" class="card" data-title="appendix c worked example">
+        <h2>Appendix C — Worked Example (Existing + New)</h2>
+        <details open>
+          <summary>Clean Up an Existing Drawing</summary>
+          <ol>
+            <li>Identify categories → create layers (TRACES/FIDUCIALS/ADHESIVE/NOTES).</li>
+            <li>Move objects to correct layers (use <code>MATCHPROP</code>).</li>
+            <li>Create Layer States (Traces/Adhesive/Final).</li>
+            <li>Layout1/2/3 → insert Title Block → viewport + restore preset.</li>
+            <li>Attributes (REV/PROJECT/DATE/DRAWN_BY) → <code>ATTSYNC</code>.</li>
+            <li><code>PUBLISH</code> to multi-page PDF.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Start a New Design</summary>
+          <ol>
+            <li>Open master template.</li>
+            <li>Draw in Model Space using correct layers.</li>
+            <li>Create Layer States and Layouts; insert Title Block.</li>
+            <li>Optional: set up Sheet Set linking for REV.</li>
+            <li>Publish to PDF.</li>
+          </ol>
+        </details>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // Theme toggle with persistence
+    const root = document.documentElement;
+    const themeBtn = document.getElementById('toggleTheme');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) root.setAttribute('data-theme', savedTheme);
+    themeBtn?.addEventListener('click', () => {
+      const cur = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', cur);
+      localStorage.setItem('theme', cur);
+    });
+
+    // Version filter
+    const verButtons = document.querySelectorAll('[data-ver]');
+    verButtons.forEach(btn => btn.addEventListener('click', () => {
+      verButtons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+      const mode = btn.dataset.ver;
+      document.querySelectorAll('[data-ver-only]')
+        .forEach(el => {
+          const want = el.getAttribute('data-ver-only');
+          el.style.display = (mode === 'all' || mode === want) ? '' : 'none';
+        });
+    }));
+
+    // Copy buttons
+    document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', async () => {
+      const text = b.getAttribute('data-copy') || b.previousElementSibling?.textContent?.trim() || '';
+      try { await navigator.clipboard.writeText(text); b.textContent = 'Copied!'; setTimeout(()=>{b.textContent='Copy';}, 1200);} catch(e) { alert('Copy failed: '+e); }
+    }));
+
+    // Expand / Collapse all details
+    const expandAll = document.getElementById('expandAll');
+    const collapseAll = document.getElementById('collapseAll');
+    expandAll?.addEventListener('click', () => document.querySelectorAll('details').forEach(d => d.open = true));
+    collapseAll?.addEventListener('click', () => document.querySelectorAll('details').forEach(d => d.open = false));
+
+    // Search filter (very simple)
+    const search = document.getElementById('search');
+    search?.addEventListener('input', () => {
+      const q = search.value.toLowerCase();
+      document.querySelectorAll('section.card').forEach(sec => {
+        const txt = sec.textContent.toLowerCase();
+        sec.style.display = txt.includes(q) ? '' : 'none';
+      });
+    });
+
+    // Active nav highlighting on scroll
+    const navLinks = document.querySelectorAll('#nav a');
+    const sections = Array.from(document.querySelectorAll('main section'));
+    const onScroll = () => {
+      const y = window.scrollY + 120;
+      let current = sections[0];
+      for (const sec of sections) { if (sec.offsetTop <= y) current = sec; else break; }
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${current.id}`));
+    };
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Persist checklist state
+    const list = document.getElementById('fontCheck');
+    const KEY = 'autocad_checklist_fonts_v1';
+    if (list) {
+      // load
+      try {
+        const saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+        const inputs = list.querySelectorAll('input');
+        inputs.forEach((inp, i) => inp.checked = !!saved[i]);
+        // save
+        list.addEventListener('change', () => {
+          const vals = Array.from(list.querySelectorAll('input')).map(i => i.checked);
+          localStorage.setItem(KEY, JSON.stringify(vals));
+        });
+      } catch {}
+    }
+  </script>
+</body>
+</html>
