@@ -27,7 +27,7 @@
       --accent-2: #059669;
       --border: #e2e8f0;
       --code: #0b1220;
-    } 
+    }
 
     html,
     body {
@@ -118,7 +118,7 @@
     .btn.primary {
       background: linear-gradient(180deg, var(--accent), #1d4ed8);
       border-color: #1d4ed8;
-      color: white; 
+      color: white;
     }
 
     .btn.ghost {
@@ -328,6 +328,7 @@
         <li><a href="#layers">Layer Manager</a></li>
         <li><a href="#layer-states">Layer States</a></li>
         <li><a href="#layouts">Layouts</a></li>
+        <li><a href="#viewports">Viewports</a></li>
         <li><a href="#block-editor">Block Editor</a></li>
         <li><a href="#attributes">Attributes</a></li>
         <li><a href="#title-block">Title Block + Attr</a></li>
@@ -384,11 +385,17 @@
             <h3>Update REV on All Sheets</h3>
             <ol>
               <li><strong>Preferred:</strong> <code>SHEETSET</code> → Sheet Set <em>Properties</em> → Change
-                <code>CurrentSheetRevision</code> → <code>REGENALL</code>.</li>
+                <code>CurrentSheetRevision</code> → <code>REGENALL</code>.
+              </li>
               <li><strong>Basic:</strong> <code>ATTEDIT</code> REV on each sheet → <code>ATTSYNC</code>.</li>
             </ol>
             <button class="copy" data-copy="SHEETSET">Copy command: SHEETSET</button>
             <button class="copy" data-copy="ATTSYNC">Copy command: ATTSYNC</button>
+            <h3>Publish All Layouts → PDF</h3>
+            <ol>
+              <li>Run <code>PUBLISH</code> → select layouts → output to single PDF.</li>
+            </ol>
+            <button class="copy" data-copy="PUBLISH">Copy command: PUBLISH</button>
           </div>
           <div class="card">
             <h3>Switch Layer Set for a Layout</h3>
@@ -397,14 +404,102 @@
               <li>Run <code>LAYERSTATE</code> → choose saved state (e.g., <em>SILVER_TRACES_LAYOUT</em>).</li>
             </ol>
             <button class="copy" data-copy="LAYERSTATE">Copy command: LAYERSTATE</button>
-          </div>
-          <div class="card">
-            <h3>Publish All Layouts → PDF</h3>
+
+            <!-- New Card: Fix Jagged Circles/Arcs -->
+
+            <h3>Fix Jagged Circles / Arcs</h3>
             <ol>
-              <li>Run <code>PUBLISH</code> → select layouts → output to single PDF.</li>
+              <li>Run <code>VIEWRES</code> → when prompted, type <strong>Y</strong> for fast zooms.</li>
+              <li>Enter circle zoom percent: <strong>2000</strong> (try 3000–5000 for extra smooth).</li>
+              <li>Regenerate: <code>REGENALL</code> (or <code>REGEN</code> for current viewport).</li>
             </ol>
-            <button class="copy" data-copy="PUBLISH">Copy command: PUBLISH</button>
+            <p class="muted">Note: This changes on‑screen smoothness only; plotted PDFs are smooth regardless.</p>
+            <div class="flex">
+              <button class="copy" data-copy="VIEWRES">Copy: VIEWRES</button>
+              <button class="copy" data-copy="REGENALL">Copy: REGENALL</button>
+              <button class="copy" data-copy="REGEN">Copy: REGEN</button>
+            </div>
+
+
+
           </div>
+
+
+          <!-- Card: Freeze All Non-Isolated Layers with LAYISO -->
+          <div class="card">
+            <h2>Freeze Non-Isolated Layers with LAYISO</h2>
+            <p>
+              <strong>LAYISO</strong> can do more than lock layers—by changing its settings you can
+              <em>freeze or turn off all non-selected layers</em>.
+            </p>
+            <ol>
+              <li>Type <code>LAYISO</code> in the command line.</li>
+              <li>Before selecting objects, type <strong>S</strong> (Settings).</li>
+              <li>At the prompt:
+                <pre>Enter setting for layers to be isolated 
+[Off/Lock and fade/Lock and dim] &lt;Lock and fade&gt;:</pre>
+                type <strong>O</strong> (for Off).
+              </li>
+              <li>If you are in <strong>Paper Space</strong>, AutoCAD will ask:<br>
+                <pre>In Paper Space viewport use [VPFreeze/Off] &lt;Off&gt;:</pre>
+                - Choose <strong>VPFreeze</strong> to freeze layers <em>only in the current viewport</em>.<br>
+                - Choose <strong>Off</strong> to hide them globally.
+              </li>
+              <li>Select the objects whose layers you want to keep visible.</li>
+              <li>Press <strong>Enter</strong>.
+                Non-selected layers are now frozen (disappear).
+              </li>
+            </ol>
+            <p>
+              ✅ To restore everything, type <code>LAYUNISO</code>.
+            </p>
+
+            <h3>Isolate Selected Layers</h3>
+            <ol>
+              <li>Select objects you want to keep visible.</li>
+              <li>Run <code>LAYISO</code> → all other layers are temporarily hidden (frozen in view).</li>
+            </ol>
+            <button class="copy" data-copy="LAYISO">Copy command: LAYISO</button>
+            <h3>Freeze Layer by Selection</h3>
+            <ol>
+              <li>Run <code>LAYFRZ</code>.</li>
+              <li>Select any object → its entire layer is frozen.</li>
+            </ol>
+            <button class="copy" data-copy="LAYFRZ">Copy command: LAYFRZ</button>
+
+
+
+          </div>
+
+
+
+          <!-- New Card: Build Layer State from Selection -->
+          <div class="card">
+            <h3>Create Layer State from Selection</h3>
+            <ol>
+              <li>Show all: <code>LAYON</code> &rarr; <code>LAYTHW</code>.</li>
+              <li>Isolate wanted layers: <code>LAYISO</code> &rarr; select objects &rarr; Enter.</li>
+              <li>Save preset: <code>LAYERSTATE</code> &rarr; <em>New</em> (e.g., <em>SILVER_TRACES_LAYOUT</em>).</li>
+              <li>Restore anywhere (Model or active viewport): <code>LAYERSTATE</code> &rarr; <em>Restore</em>.</li>
+              <li>Back to normal: <code>LAYUNISO</code> (and <code>LAYTHW</code> if needed).</li>
+            </ol>
+            <p class="muted">Tip: For viewport-only isolation with better performance, freeze others with
+              <code>VPLAYER</code> &rarr; <em>Freeze</em> &rarr; <em>Current</em> viewport.
+            </p>
+            <div class="flex">
+              <button class="copy" data-copy="LAYON">Copy: LAYON</button>
+              <button class="copy" data-copy="LAYTHW">Copy: LAYTHW</button>
+              <button class="copy" data-copy="LAYISO">Copy: LAYISO</button>
+              <button class="copy" data-copy="LAYERSTATE">Copy: LAYERSTATE</button>
+              <button class="copy" data-copy="LAYUNISO">Copy: LAYUNISO</button>
+              <button class="copy" data-copy="VPLAYER">Copy: VPLAYER</button>
+            </div>
+          </div>
+
+
+
+
+
         </div>
         <p class="tip">Tip: Toggle on‑screen lineweights with <kbd class="kbd">LWDISPLAY</kbd> → <kbd
             class="kbd">ON</kbd>. Toggle OSNAP with <kbd class="kbd">F3</kbd>; grid snap with <kbd class="kbd">F9</kbd>.
@@ -420,7 +515,8 @@
           <summary>AutoCAD Onboarding Instructions</summary>
           <ul>
             <li>Retrieve files from a co‑worker or from the Onboarding folder. <em>Note:</em> <kbd>WIN+R</kbd> →
-              <code>%AppData%</code> to quickly find hidden folders.</li>
+              <code>%AppData%</code> to quickly find hidden folders.
+            </li>
             <li>Retrieve all Plot Styles (CTB). Copy into:<br>
               <code>C:\Users&lt;UserName&gt;\AppData\Roaming\Autodesk\AutoCAD LT 20XX\enu\Plotters\Plot Styles</code>
             </li>
@@ -655,6 +751,37 @@
         </ol>
         <p class="tip">Each Layout becomes a page in the final PDF. Use different presets per Layout.</p>
       </section>
+
+
+      <!-- Card: Using Viewports in AutoCAD -->
+      <section id="viewports" class="card" data-title="viewports">
+        <h2>Viewports in AutoCAD</h2>
+        <p>
+          A <strong>viewport</strong> is a window in a Layout (Paper Space) that looks into Model Space.
+          Use them to control <em>what</em> you see, <em>how big</em> it looks, and <em>which layers</em> are visible.
+        </p>
+        <h3>How to Use Viewports</h3>
+        <ol>
+          <li>Switch to a <strong>Layout</strong> tab (Paper Space).</li>
+          <li>Type <code>MV</code> (Make Viewport) or use the ribbon to create one.</li>
+          <li>Draw a rectangle where you want the viewport.</li>
+          <li>Double-click inside the viewport → you’re now “in” Model Space through that window.</li>
+          <li>Set the desired <strong>scale</strong> (e.g. 1:1, 1:2) from the status bar.</li>
+          <li>Use <code>LAYFRZ</code> or <code>VPFreeze</code> to hide layers in only that viewport.</li>
+          <li>Double-click outside the viewport to return to Paper Space.</li>
+        </ol>
+        <h3>When to Use Viewports</h3>
+        <ul>
+          <li>To show the same drawing at <strong>different scales</strong>.</li>
+          <li>To isolate <strong>different layers</strong> in separate sheets.</li>
+          <li>To make multiple detail callouts from one master model.</li>
+        </ul>
+        <p>
+          ✅ Rule of thumb: <strong>Always draw in Model Space, always plot from Layouts, and use Viewports to control
+            views.</strong>
+        </p>
+      </section>
+
 
       <!-- BLOCK EDITOR -->
       <section id="block-editor" class="card" data-title="block editor">
@@ -928,7 +1055,8 @@ color-8mil.ctb</pre>
           <summary>Final Note</summary>
           <p>If fonts are missing and cannot be obtained, AutoCAD will substitute the <code>FONTALT</code> font (usually
             <em>simplex.shx</em>). This causes text to appear stretched or overflow boxes—always install the correct
-            fonts to avoid layout issues.</p>
+            fonts to avoid layout issues.
+          </p>
         </details>
       </section>
 
@@ -1026,15 +1154,15 @@ color-8mil.ctb</pre>
   </script>
 
   <!-- FOOTER -->
-<footer class="site-footer">
-  <p>Connect with me on
-    <a href="https://www.linkedin.com/in/marcusfrancisco" target="_blank" rel="noopener">LinkedIn</a>
-    and
-    <a href="https://github.com/marcusfrancisco" target="_blank" rel="noopener">GitHub</a>.
-  </p>
-  <p>© 2025 Marcus Francisco. All rights reserved.</p>
-  <p>Site design, content, and code by Marcus Francisco.</p>
-</footer>
+  <footer class="site-footer">
+    <p>Connect with me on
+      <a href="https://www.linkedin.com/in/marcusfrancisco" target="_blank" rel="noopener">LinkedIn</a>
+      and
+      <a href="https://github.com/marcusfrancisco" target="_blank" rel="noopener">GitHub</a>.
+    </p>
+    <p>© 2025 Marcus Francisco. All rights reserved.</p>
+    <p>Site design, content, and code by Marcus Francisco.</p>
+  </footer>
 
 
 </body>
