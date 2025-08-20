@@ -1,5 +1,7 @@
 <!doctype html>
+
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,8 +17,9 @@
       --border: #1f2937;
       --code: #111827;
     }
+
     [data-theme="light"] {
-      --bg: #f8fafc;
+      --bg: #f1f8ff;
       --panel: #ffffff;
       --text: #0f172a;
       --muted: #475569;
@@ -24,66 +27,292 @@
       --accent-2: #059669;
       --border: #e2e8f0;
       --code: #0b1220;
-    }
-    html, body { height:100%; }
+    } 
+
+    html,
     body {
-      margin:0; background:var(--bg); color:var(--text);
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
       font: 15px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
     }
-    .app { display:grid; grid-template-columns: 280px 1fr; min-height:100vh; }
+
+    .app {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+
     nav {
       background: var(--panel);
       border-right: 1px solid var(--border);
-      padding: 18px 14px; position: sticky; top:0; height:100vh; overflow:auto;
+      padding: 18px 14px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
     }
-    nav h1 { font-size: 16px; margin: 0 0 10px; letter-spacing: 0.2px; }
-    .search { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
+
+    nav h1 {
+      font-size: 16px;
+      margin: 0 0 10px;
+      letter-spacing: 0.2px;
+    }
+
+    .search {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
     .search input {
-      width:100%; padding:8px 10px; border-radius: 8px; border:1px solid var(--border);
-      background: transparent; color: var(--text);
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
     }
-    .nav-list { list-style:none; margin:10px 0 0; padding:0; display:flex; flex-direction:column; gap:6px; }
-    .nav-list a{
-      display:block; padding:8px 10px; border-radius:8px; color:var(--text); text-decoration:none; border:1px solid transparent;
+
+    .nav-list {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
-    .nav-list a:hover, .nav-list a.active{ background:rgba(96,165,250,.12); border-color:var(--border); }
-    .btn { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:10px; border:1px solid var(--border); background:var(--panel); color:var(--text); cursor:pointer; }
-    .btn.primary { background: linear-gradient(180deg, var(--accent), #1d4ed8); border-color:#1d4ed8; color:white; }
-    .btn.ghost { background:transparent; }
-    .pill { padding:4px 8px; border-radius:999px; border:1px solid var(--border); font-size:12px; color:var(--muted); }
-    main { padding: 24px 28px; }
-    .header { display:flex; align-items:center; gap:12px; justify-content:space-between; margin-bottom:18px; }
-    .left { display:flex; align-items:center; gap:12px; }
-    .toggle-wrap { display:flex; gap:8px; align-items:center; }
-    .card { background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:16px 18px; margin:14px 0; }
-    h2 { margin: 22px 0 10px; font-size:20px; }
-    h3 { margin: 18px 0 8px; font-size:16px; }
-    details { border:1px dashed var(--border); border-radius:12px; padding:10px 12px; background: transparent; }
-    details + details{ margin-top:10px; }
-    details summary { cursor:pointer; color:var(--text); font-weight:600; }
-    code, kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; background: var(--panel); color: var(--text); padding:2px 6px; border-radius:6px; border:1px solid var(--border); }
-    pre { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:14px; overflow:auto; }
-    .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-    .flex { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-    .muted { color:var(--muted); }
-    .copy { cursor:pointer; font-size:12px; border:none; background:transparent; color:var(--accent); }
-    .tip { border-left:3px solid var(--accent); padding-left:10px; color:var(--muted); }
-    .checklist li { margin:6px 0; }
-    .checklist input { transform: translateY(1px); }
-    .version-toggle { display:flex; gap:6px; }
-    .kbd { border:1px solid var(--border); padding:2px 6px; border-radius:6px; background: var(--panel); }
-    .right-actions{ display:flex; gap:8px; flex-wrap:wrap; }
+
+    .nav-list a {
+      display: block;
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+
+    .nav-list a:hover,
+    .nav-list a.active {
+      background: rgba(96, 165, 250, .12);
+      border-color: var(--border);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .btn.primary {
+      background: linear-gradient(180deg, var(--accent), #1d4ed8);
+      border-color: #1d4ed8;
+      color: white; 
+    }
+
+    .btn.ghost {
+      background: transparent;
+    }
+
+    .pill {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    main {
+      padding: 24px 28px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .toggle-wrap {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin: 14px 0;
+    }
+
+    h2 {
+      margin: 22px 0 10px;
+      font-size: 20px;
+    }
+
+    h3 {
+      margin: 18px 0 8px;
+      font-size: 16px;
+    }
+
+    details {
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: transparent;
+    }
+
+    details+details {
+      margin-top: 10px;
+    }
+
+    details summary {
+      cursor: pointer;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    code,
+    kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      background: var(--panel);
+      color: var(--text);
+      padding: 2px 6px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    pre {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      overflow: auto;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .flex {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .copy {
+      cursor: pointer;
+      font-size: 12px;
+      border: none;
+      background: transparent;
+      color: var(--accent);
+    }
+
+    .tip {
+      border-left: 3px solid var(--accent);
+      padding-left: 10px;
+      color: var(--muted);
+    }
+
+    .checklist li {
+      margin: 6px 0;
+    }
+
+    .checklist input {
+      transform: translateY(1px);
+    }
+
+    .version-toggle {
+      display: flex;
+      gap: 6px;
+    }
+
+    .kbd {
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: var(--panel);
+    }
+
+    .right-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
 
     /* Print-friendly */
     @media print {
-      nav { display:none; }
-      .app { grid-template-columns: 1fr; }
-      .btn, .right-actions { display:none !important; }
-      body { background:white; color:black; }
-      .card { break-inside: avoid; }
+      nav {
+        display: none;
+      }
+
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .btn,
+      .right-actions {
+        display: none !important;
+      }
+
+      body {
+        background: white;
+        color: black;
+      }
+
+      .card {
+        break-inside: avoid;
+      }
+    }
+
+    .site-footer {
+      background: var(--panel);
+      color: var(--muted);
+      text-align: center;
+      padding: 16px;
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+    }
+
+    .site-footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
+
 <body>
   <div class="app" id="app">
     <nav>
@@ -92,7 +321,8 @@
         <input id="search" placeholder="Search steps…" aria-label="Search" />
       </div>
       <ul class="nav-list" id="nav">
-        <li><a href="#quickstart" class="active">Quick Start</a></li>
+        <li><a href="#overview" class="active">Overview</a></li>
+        <li><a href="#quickstart">Quick Start</a></li>
         <li><a href="#onboarding">Onboarding</a></li>
         <li><a href="#etransmit">eTransmit</a></li>
         <li><a href="#layers">Layer Manager</a></li>
@@ -102,16 +332,21 @@
         <li><a href="#attributes">Attributes</a></li>
         <li><a href="#title-block">Title Block + Attr</a></li>
         <li><a href="#sheet-set">Sheet Set Manager</a></li>
+        <li><a href="#printing">Multi‑Sheet Printing</a></li>
         <li><a href="#appendix-a">Appendix A (Rev)</a></li>
         <li><a href="#appendix-b">Appendix B (Layer States)</a></li>
         <li><a href="#appendix-c">Appendix C (Worked)</a></li>
+        <li><a href="#appendix-troubleshooting">Appendix D (Missing Files)</a></li>
+        <li><a href="#benefits">Benefits Summary</a></li>
       </ul>
     </nav>
+
 
     <main>
       <div class="header">
         <div class="left">
           <span class="pill">2019 ↔ 2026 Compatible</span>
+          <span class="pill">Master Template: ACAD-2019-LITE-MASTER TEMPLATE_10-16-20</span>
         </div>
         <div class="right-actions">
           <div class="toggle-wrap">
@@ -131,14 +366,25 @@
         </div>
       </div>
 
+      <!-- OVERVIEW -->
+      <section id="overview" class="card" data-title="overview">
+        <h2>Overview</h2>
+        <p>This guide explains how to set up AutoCAD LT (2019 and 2026), how to install required fonts and plot styles,
+          and how to use <strong>eTransmit</strong> to share drawings with all dependencies (fonts, CTBs, Xrefs, images,
+          etc.) so files look identical on all systems. It also covers layer management, paper space layouts, a smart
+          title block with attributes, the Block Editor, Sheet Set Manager, and how to produce multi‑sheet PDFs quickly.
+        </p>
+      </section>
+
       <!-- QUICK START -->
       <section id="quickstart" class="card" data-title="quick start">
-        <h2>Quick Start (Most-Used Actions)</h2>
+        <h2>Quick Start (Most‑Used Actions)</h2>
         <div class="grid">
           <div class="card">
             <h3>Update REV on All Sheets</h3>
             <ol>
-              <li><strong>Preferred:</strong> <code>Sheet Set Manager</code> → Sheet Set <em>Properties</em> → Change <code>CurrentSheetRevision</code> → <code>REGENALL</code>.</li>
+              <li><strong>Preferred:</strong> <code>SHEETSET</code> → Sheet Set <em>Properties</em> → Change
+                <code>CurrentSheetRevision</code> → <code>REGENALL</code>.</li>
               <li><strong>Basic:</strong> <code>ATTEDIT</code> REV on each sheet → <code>ATTSYNC</code>.</li>
             </ol>
             <button class="copy" data-copy="SHEETSET">Copy command: SHEETSET</button>
@@ -147,7 +393,7 @@
           <div class="card">
             <h3>Switch Layer Set for a Layout</h3>
             <ol>
-              <li>Activate viewport (double-click inside).</li>
+              <li>Activate viewport (double‑click inside).</li>
               <li>Run <code>LAYERSTATE</code> → choose saved state (e.g., <em>SILVER_TRACES_LAYOUT</em>).</li>
             </ol>
             <button class="copy" data-copy="LAYERSTATE">Copy command: LAYERSTATE</button>
@@ -160,22 +406,65 @@
             <button class="copy" data-copy="PUBLISH">Copy command: PUBLISH</button>
           </div>
         </div>
-        <p class="tip">Tip: Toggle on-screen lineweights with <kbd class="kbd">LWDISPLAY</kbd> → <kbd class="kbd">ON</kbd>. Toggle OSNAP with <kbd class="kbd">F3</kbd>; grid snap with <kbd class="kbd">F9</kbd>.</p>
+        <p class="tip">Tip: Toggle on‑screen lineweights with <kbd class="kbd">LWDISPLAY</kbd> → <kbd
+            class="kbd">ON</kbd>. Toggle OSNAP with <kbd class="kbd">F3</kbd>; grid snap with <kbd class="kbd">F9</kbd>.
+        </p>
       </section>
 
       <!-- ONBOARDING -->
       <section id="onboarding" class="card" data-title="onboarding">
         <h2>Onboarding Essentials</h2>
         <p class="muted">Install fonts (TTF/OTF), copy SHX/CTB, set default template, then restart AutoCAD.</p>
+
+        <details open>
+          <summary>AutoCAD Onboarding Instructions</summary>
+          <ul>
+            <li>Retrieve files from a co‑worker or from the Onboarding folder. <em>Note:</em> <kbd>WIN+R</kbd> →
+              <code>%AppData%</code> to quickly find hidden folders.</li>
+            <li>Retrieve all Plot Styles (CTB). Copy into:<br>
+              <code>C:\Users&lt;UserName&gt;\AppData\Roaming\Autodesk\AutoCAD LT 20XX\enu\Plotters\Plot Styles</code>
+            </li>
+            <li>Install all Windows fonts (.ttf or .otf) by right‑clicking each and selecting <em>Install</em>. Required
+              examples:
+              <ul>
+                <li>TT0142M.ttf</li>
+                <li>TT0200M.ttf</li>
+                <li>TT0201M.ttf</li>
+                <li>TT0202M.ttf</li>
+              </ul>
+            </li>
+            <li>Copy all AutoCAD SHX fonts into:<br><code>C:\Program Files\Autodesk\AutoCAD LT 20XX\Fonts</code></li>
+            <li>Copy templates
+              into:<br><code>C:\Users&lt;UserName&gt;\AppData\Local\Autodesk\AutoCAD LT 20XX\R32\enu\Template</code>
+            </li>
+            <li>Restart computer. Open AutoCAD and select the template: <strong>ACAD-2019-LITE-MASTER
+                TEMPLATE_10-16-20</strong>.</li>
+          </ul>
+        </details>
+
         <div class="grid">
           <div class="card">
             <h3>Paths (copy)</h3>
             <ul>
-              <li>Plot Styles (CTB) 2019 → <code>C:\Users\&lt;User&gt;\AppData\Roaming\Autodesk\AutoCAD LT 2019\enu\Plotters\Plot Styles</code> <button class="copy" data-copy="C:\\Users\\&lt;User&gt;\\AppData\\Roaming\\Autodesk\\AutoCAD LT 2019\\enu\\Plotters\\Plot Styles">Copy</button></li>
-              <li>Plot Styles (CTB) 2026 → <code>C:\Users\&lt;User&gt;\AppData\Roaming\Autodesk\AutoCAD LT 2026\R32\enu\Plotters\Plot Styles</code> <button class="copy" data-copy="C:\\Users\\&lt;User&gt;\\AppData\\Roaming\\Autodesk\\AutoCAD LT 2026\\R32\\enu\\Plotters\\Plot Styles">Copy</button></li>
-              <li>AutoCAD SHX → <code>C:\Program Files\Autodesk\AutoCAD LT 20XX\Fonts</code> <button class="copy" data-copy="C:\\Program Files\\Autodesk\\AutoCAD LT 20XX\\Fonts">Copy</button></li>
-              <li>Windows Fonts → <code>C:\Windows\Fonts</code> <button class="copy" data-copy="C:\\Windows\\Fonts">Copy</button></li>
-              <li>Templates 2026 → <code>C:\Users\&lt;User&gt;\AppData\Local\Autodesk\AutoCAD LT 2026\R32\enu\Template</code> <button class="copy" data-copy="C:\\Users\\&lt;User&gt;\\AppData\\Local\\Autodesk\\AutoCAD LT 2026\\R32\\enu\\Template">Copy</button></li>
+              <li>Plot Styles (CTB) 2019 →
+                <code>C:\Users\&lt;User&gt;\AppData\Roaming\Autodesk\AutoCAD LT 2019\enu\Plotters\Plot Styles</code>
+                <button class="copy"
+                  data-copy="C:\\Users\\<User>\\AppData\\Roaming\\Autodesk\\AutoCAD LT 2019\\enu\\Plotters\\Plot Styles">Copy</button>
+              </li>
+              <li>Plot Styles (CTB) 2026 →
+                <code>C:\Users\&lt;User&gt;\AppData\Roaming\Autodesk\AutoCAD LT 2026\R32\enu\Plotters\Plot Styles</code>
+                <button class="copy"
+                  data-copy="C:\\Users\\<User>\\AppData\\Roaming\\Autodesk\\AutoCAD LT 2026\\R32\\enu\\Plotters\\Plot Styles">Copy</button>
+              </li>
+              <li>AutoCAD SHX → <code>C:\Program Files\Autodesk\AutoCAD LT 20XX\Fonts</code> <button class="copy"
+                  data-copy="C:\\Program Files\\Autodesk\\AutoCAD LT 20XX\\Fonts">Copy</button></li>
+              <li>Windows Fonts → <code>C:\Windows\Fonts</code> <button class="copy"
+                  data-copy="C:\\Windows\\Fonts">Copy</button></li>
+              <li>Templates (2019/2026) →
+                <code>C:\Users\&lt;User&gt;\AppData\Local\Autodesk\AutoCAD LT 20XX\R32\enu\Template</code> <button
+                  class="copy"
+                  data-copy="C:\\Users\\<User>\\AppData\\Local\\Autodesk\\AutoCAD LT 20XX\\R32\\enu\\Template">Copy</button>
+              </li>
             </ul>
           </div>
           <div class="card">
@@ -183,8 +472,9 @@
             <ul class="checklist" id="fontCheck">
               <li><label><input type="checkbox"> Install Futura Bk BT (.ttf)</label></li>
               <li><label><input type="checkbox"> Install Futura Md BT (.ttf)</label></li>
-              <li><label><input type="checkbox"> Install TT0200M/01M/02M (.ttf/.shx)</label></li>
+              <li><label><input type="checkbox"> Install TT0142M/TT0200M/TT0201M/TT0202M (.ttf/.shx)</label></li>
               <li><label><input type="checkbox"> Copy SHX into AutoCAD Fonts</label></li>
+              <li><label><input type="checkbox"> Copy CTB into Plot Styles</label></li>
               <li><label><input type="checkbox"> Restart AutoCAD</label></li>
             </ul>
           </div>
@@ -194,23 +484,75 @@
       <!-- ETRANSMIT -->
       <section id="etransmit" class="card" data-title="etransmit">
         <h2>eTransmit (Full Package)</h2>
+
         <details open>
-          <summary>Transmitter Checklist (every time)</summary>
+          <summary>Transmitter Short Checklist</summary>
           <ol>
             <li>Open DWG in <span data-ver-only="2019">LT 2019</span><span data-ver-only="2026">LT 2026</span>.</li>
-            <li>Run <code>ETRANSMIT</code> → <em>Transmittal Setups…</em> → select <strong>Full_Transmit_With_Fonts</strong>.</li>
-            <li>Ensure options: Include <strong>fonts</strong>, <strong>plot styles</strong>, <strong>Xrefs</strong>, <strong>raster</strong>, <strong>materials</strong>, <strong>data links</strong>.</li>
-            <li>Format: <strong>AutoCAD 2018 DWG</strong>; Output: <strong>ZIP</strong>; Path: <em>one folder</em>; Xrefs: <strong>Bind</strong>.</li>
-            <li>Generate ZIP and send.</li>
+            <li>Type <code>ETRANSMIT</code> → Enter.</li>
+            <li>Select <strong>Full_Transmit_With_Fonts</strong> setup (NOT Standard).</li>
+            <li>If creating a new setup, check <em>every</em> include option:
+              <ul>
+                <li>Include fonts</li>
+                <li>Include plot style tables</li>
+                <li>Include all referenced files (Xrefs, images, data links, sheet sets)</li>
+                <li>Include material textures</li>
+                <li>Include raster images</li>
+              </ul>
+            </li>
+            <li>File format: <strong>AutoCAD LT 2018 Drawing Format</strong> (ensures 2019–2026 compatibility).</li>
+            <li>Bind external references (Bind type: <strong>Bind</strong>).</li>
+            <li>Output type: <strong>ZIP</strong>.</li>
+            <li>Path options: <em>Place all files in one folder</em>.</li>
+            <li>Save and generate ZIP.</li>
+            <li>Send ZIP to recipient.</li>
           </ol>
         </details>
+
         <details>
           <summary>Receiver Checklist</summary>
           <ol>
-            <li>Extract ZIP.</li>
-            <li>Install any <code>.ttf/.otf</code> (right‑click → <em>Install for all users</em>).</li>
-            <li>Copy <code>.ctb</code> to your Plot Styles path (see Onboarding paths).</li>
+            <li>Save ZIP locally.</li>
+            <li>Extract ZIP to a folder (Right‑click → Extract All…).</li>
+            <li>Install any <code>.ttf/.otf</code> (Right‑click → Install for all users).</li>
+            <li>Copy <code>.ctb</code>
+              to:<br><code>C:\Users&lt;UserName&gt;\AppData\Roaming\Autodesk\AutoCAD LT 2026\R32\enu\Plotters\Plot Styles</code>
+            </li>
             <li>Open DWG from the extracted folder.</li>
+          </ol>
+        </details>
+
+        <details>
+          <summary>Where are SHX, TTF, and CTB files found?</summary>
+          <ul>
+            <li>AutoCAD SHX Fonts: <code>C:\Program Files\Autodesk\AutoCAD LT 20XX\Fonts</code></li>
+            <li>Windows TTF/OTF Fonts: <code>C:\Windows\Fonts</code></li>
+            <li>Plot Styles (CTB):
+              <code>C:\Users&lt;UserName&gt;\AppData\Roaming\Autodesk\AutoCAD LT 20XX\enu\Plotters\Plot Styles</code>
+            </li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>Full Length eTransmit Instructions</summary>
+          <ol>
+            <li><strong>Step 1</strong> – Open the DWG.</li>
+            <li><strong>Step 2</strong> – Type <code>ETRANSMIT</code> and press Enter.</li>
+            <li><strong>Step 3</strong> – Create a new setup: <em>Full_Transmit_With_Fonts</em> (Transmittal Setups →
+              New → Continue).</li>
+            <li><strong>Step 4</strong> – Modify setup:
+              <ul>
+                <li>Transmittal File Type: <strong>ZIP</strong></li>
+                <li>Path Options: <strong>Place all files in one folder</strong></li>
+                <li>File Format: <strong>AutoCAD LT 2018 Drawing Format</strong></li>
+                <li>Bind External References: <strong>Bind</strong> (Bind type: Bind)</li>
+                <li>Include Options (all checked): fonts, plot style tables, material textures, all referenced Xrefs,
+                  photometric web files, data link files, sheet set data files, raster images</li>
+                <li>Optional description: “Transmits everything including fonts. Saved to 2018 format.”</li>
+              </ul>
+            </li>
+            <li><strong>Step 5</strong> – Generate ZIP (verify included files list, then OK).</li>
+            <li><strong>Step 6</strong> – Send ZIP to recipient.</li>
           </ol>
         </details>
       </section>
@@ -219,56 +561,97 @@
       <section id="layers" class="card" data-title="layers">
         <h2>Layer Manager</h2>
         <p>Organize geometry into named layers that control color, linetype, lineweight, and plot behavior.</p>
+
+        <details open>
+          <summary>Key Commands & Controls</summary>
+          <ul>
+            <li><code>LAYER</code> — Layer Properties Manager</li>
+            <li>Layer controls: On/Off, Freeze/Thaw, Lock/Unlock, Color, Linetype</li>
+            <li>Use CTB plot styles to map colors → lineweights</li>
+          </ul>
+        </details>
+
         <div class="grid">
           <div class="card">
-            <h3>Common Layers</h3>
+            <h3>Common Layers & Styles</h3>
             <ul>
-              <li><strong>TRACES</strong> — black, 5 mil</li>
-              <li><strong>FIDUCIALS</strong> — red, thin</li>
-              <li><strong>ADHESIVE</strong> — grey, thin</li>
-              <li><strong>NOTES</strong> — light or non-plot</li>
+              <li><strong>TRACES</strong> — black, 0.25 mm (≈ 5 mil)</li>
+              <li><strong>FIDUCIALS</strong> — red, 0.10 mm (thin)</li>
+              <li><strong>ADHESIVE</strong> — grey, 0.10 mm (thin)</li>
+              <li><strong>NOTES</strong> — light / non‑plot (e.g., green 0.09 mm)</li>
             </ul>
           </div>
           <div class="card">
-            <h3>Commands</h3>
-            <p><button class="copy" data-copy="LAYER">Copy: LAYER</button> <span class="muted">open Layer Properties</span></p>
-            <p><button class="copy" data-copy="MATCHPROP">Copy: MATCHPROP</button> <span class="muted">remap objects to layer styles</span></p>
+            <h3>Helpful Tools</h3>
+            <p><button class="copy" data-copy="LAYER">Copy: LAYER</button> <span class="muted">open Layer
+                Properties</span></p>
+            <p><button class="copy" data-copy="MATCHPROP">Copy: MATCHPROP</button> <span class="muted">remap objects to
+                layer styles</span></p>
           </div>
         </div>
+
+        <details>
+          <summary>Best Practices</summary>
+          <ul>
+            <li>Create a layer for each type of drawing content (TRACES, FIDUCIALS, ADHESIVE, NOTES).</li>
+            <li>Freeze or turn off irrelevant layers per Layout / viewport.</li>
+            <li>Keep lineweights consistent via CTB; use Layer States for repeatability.</li>
+          </ul>
+        </details>
       </section>
 
       <!-- LAYER STATES -->
       <section id="layer-states" class="card" data-title="layer states">
         <h2>Layer States (Saved Configurations)</h2>
-        <p>Save/restore a snapshot of layer visibility, freeze/thaw, colors, and lineweights. Use one-click presets like “Silver Traces Layout”.</p>
+        <p>Save/restore a snapshot of layer visibility, freeze/thaw, colors, and lineweights. Use one‑click presets like
+          “Silver Traces Layout”.</p>
+
         <details open>
           <summary>Create a Layer State</summary>
           <ol>
-            <li>Set layers as desired (On/Off, Freeze/Thaw, etc.).</li>
+            <li>Adjust layers (On/Off, Freeze/Thaw, Color, etc.) as desired.</li>
             <li>Run <code>LAYERSTATE</code> → <em>New</em> → name it (e.g., <em>SILVER_TRACES_LAYOUT</em>).</li>
+            <li>Save.</li>
           </ol>
         </details>
+
+        <details>
+          <summary>Examples & Usage</summary>
+          <ul>
+            <li>“Silver Traces Layout” → TRACES, FIDUCIALS, NOTES</li>
+            <li>“Adhesive Layout” → ADHESIVE, FIDUCIALS, NOTES</li>
+            <li>“Final Assembly” → ALL layers</li>
+          </ul>
+          <p>Restore via Layer States Manager in Model Space or in each viewport. Multiple Layouts can share the same
+            Layer State.</p>
+        </details>
+
         <details>
           <summary>Restore per Viewport</summary>
           <ol>
-            <li>Activate a viewport (double-click inside).</li>
+            <li>Double‑click inside a viewport to activate it.</li>
             <li>Run <code>LAYERSTATE</code> → select preset → <em>Restore</em>.</li>
+            <li>Freeze/Thaw in that viewport without affecting others.</li>
           </ol>
         </details>
+
         <details>
           <summary>Export/Import .LAS</summary>
-          <p>Use <code>LAYERSTATE</code> → <em>Export/Import</em> to share presets across drawings.</p>
+          <p>Use <code>LAYERSTATE</code> → Export/Import to share presets across drawings.</p>
         </details>
       </section>
 
       <!-- LAYOUTS -->
       <section id="layouts" class="card" data-title="layouts">
         <h2>Layouts (Paper Space)</h2>
+        <p>Layouts represent printable sheets. Model Space = 1:1 design; Layouts = paper with border/title block +
+          scaled viewports.</p>
         <ol>
           <li>Switch to a Layout tab.</li>
-          <li>Insert Title Block.</li>
-          <li>Create viewport (<code>MV</code>) and set scale.</li>
-          <li>Restore the correct <strong>Layer State</strong> inside the viewport.</li>
+          <li>Insert or Xref your Title Block template.</li>
+          <li>Create viewport (<code>MV</code>) and set scale (1:2, 1:5, etc.).</li>
+          <li>Activate viewport, Freeze/Thaw per‑sheet layers, then restore the correct <strong>Layer State</strong>.
+          </li>
         </ol>
         <p class="tip">Each Layout becomes a page in the final PDF. Use different presets per Layout.</p>
       </section>
@@ -280,19 +663,37 @@
         <ol>
           <li>Run <code>BEDIT</code> → choose block (e.g., <em>TITLE_BLOCK</em>).</li>
           <li>Add/modify geometry, insert attributes, or place fields.</li>
-          <li>Save & Close → <code>ATTSYNC</code> to refresh placed blocks.</li>
+          <li>Save &amp; Close → <code>ATTSYNC</code> to refresh placed blocks.</li>
         </ol>
       </section>
 
       <!-- ATTRIBUTES -->
       <section id="attributes" class="card" data-title="attributes">
         <h2>Attributes</h2>
-        <p>Attributes are editable text fields inside a block (e.g., REV, PROJECT, DRAWN_BY).</p>
-        <ol>
-          <li>Create with <code>ATTDEF</code> (Tag/Prompt/Default).</li>
-          <li>Edit with <code>ATTEDIT</code> or Enhanced Attribute Editor (EATTEDIT).</li>
-          <li>Sync after changes with <code>ATTSYNC</code>.</li>
-        </ol>
+        <p>Attributes are editable text fields inside a block (e.g., REV, PROJECT, DRAWN_BY, DATE). They can be edited
+          and updated across Layouts.</p>
+        <details open>
+          <summary>Create Attributes</summary>
+          <ol>
+            <li>Command: <code>ATTDEF</code></li>
+            <li>Fill in:
+              <ul>
+                <li>Tag (e.g., REV, PROJECT, DRAWN_BY)</li>
+                <li>Prompt (shown when editing)</li>
+                <li>Default (e.g., A)</li>
+              </ul>
+            </li>
+            <li>Place the attribute inside the title block.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Edit &amp; Sync</summary>
+          <ul>
+            <li><code>ATTEDIT</code> / <code>EATTEDIT</code> — edit values</li>
+            <li><code>BATTMAN</code> — batch manage attributes</li>
+            <li><code>ATTSYNC</code> — sync block definition &amp; instances</li>
+          </ul>
+        </details>
       </section>
 
       <!-- TITLE BLOCK + ATTR -->
@@ -300,7 +701,7 @@
         <h2>Title Block with Attributes</h2>
         <ol>
           <li>Draw border/boxes/logo in Paper Space.</li>
-          <li>Create attributes: REV, PROJECT, DATE, DRAWN_BY via <code>ATTDEF</code>.</li>
+          <li>Create attributes with <code>ATTDEF</code>: REV, PROJECT, DATE, DRAWN_BY.</li>
           <li>Select all → <code>BLOCK</code> → name <em>TITLE_BLOCK</em>.</li>
           <li>Insert into each Layout and fill fields.</li>
         </ol>
@@ -310,6 +711,7 @@
       <section id="sheet-set" class="card" data-title="sheet set manager">
         <h2>Sheet Set Manager (Advanced)</h2>
         <p>Manage multiple Layouts as one project and drive common fields like REV from a single place.</p>
+
         <details open>
           <summary>Setup</summary>
           <ol>
@@ -318,48 +720,81 @@
             <li>Link title block attributes to fields (e.g., <em>CurrentSheetRevision</em>).</li>
           </ol>
         </details>
+
         <details>
           <summary>Update REV (Preferred)</summary>
           <ol>
-            <li>Sheet Set <em>Properties</em> → change <code>CurrentSheetRevision</code>.</li>
+            <li>Sheet Set <em>Properties</em> → change <code>CurrentSheetRevision</code> from A → C.</li>
             <li><code>REGENALL</code> → publish.</li>
           </ol>
         </details>
+
         <details>
-          <summary>Link REV Attribute to Sheet Set (one-time)</summary>
+          <summary>Link REV Attribute to Sheet Set (one‑time)</summary>
           <ol>
             <li><code>BEDIT</code> the title block → select REV attribute.</li>
-            <li>Insert Field → Category: <em>SheetSet</em> → Field: <em>CurrentSheetRevision</em>.</li>
-            <li>Save & Close → <code>ATTSYNC</code> all instances.</li>
+            <li>Insert Field → Category: <em>SheetSet</em> → Field: <em>CurrentSheetRevision</em> (or custom property).
+            </li>
+            <li>Save &amp; Close → <code>ATTSYNC</code> all instances.</li>
           </ol>
         </details>
       </section>
 
+      <!-- PRINTING -->
+      <section id="printing" class="card" data-title="printing">
+        <h2>Printing Multiple Layouts</h2>
+        <ol>
+          <li>Use <code>PUBLISH</code>.</li>
+          <li>Select all Layouts.</li>
+          <li>Output to PDF (single multi‑page file).</li>
+          <li>Each Layout prints as a separate page; verify lineweights and title block data.</li>
+        </ol>
+      </section>
+
       <!-- APPENDIX A -->
       <section id="appendix-a" class="card" data-title="appendix a rev">
-        <h2>Appendix A — Update Revision A → C</h2>
+        <h2>Appendix A — Updating Revision Numbers (A → C)</h2>
+
         <details open>
-          <summary>Method 1: Attributes (Basic)</summary>
+          <summary>Method 1: Title Block with Attributes (Basic)</summary>
           <ol>
-            <li><code>ATTEDIT</code> → edit REV on each Layout.</li>
+            <li><code>ATTEDIT</code> (or <code>EATTEDIT</code>).</li>
+            <li>Select the title block attribute <strong>REV</strong>.</li>
+            <li>Change value from A → C.</li>
+            <li>Repeat in each Layout if not linked.</li>
             <li><code>ATTSYNC</code> to refresh.</li>
-            <li><code>PUBLISH</code> to PDF.</li>
+            <li>Save and <code>PUBLISH</code> to PDF.</li>
           </ol>
         </details>
+
         <details>
-          <summary>Method 2: Sheet Set (Preferred)</summary>
+          <summary>Method 2: Sheet Set Manager (Advanced, Preferred)</summary>
           <ol>
-            <li><code>SHEETSET</code> → Sheet Set <em>Properties</em> → set <strong>A → C</strong>.</li>
-            <li><code>REGENALL</code> → <code>PUBLISH</code>.</li>
+            <li><code>SHEETSET</code> → open Sheet Set.</li>
+            <li>Right‑click Sheet Set name → <em>Properties</em>.</li>
+            <li>Edit <code>CurrentSheetRevision</code> from A → C.</li>
+            <li>OK → <code>REGENALL</code>.</li>
+            <li>All Layouts update automatically.</li>
           </ol>
         </details>
+
         <details>
-          <summary>Setup: Link REV to Sheet Set (one-time)</summary>
+          <summary>Setup: Link REV to Sheet Set (one‑time)</summary>
           <ol>
             <li><code>BEDIT</code> title block → select REV attribute.</li>
             <li>Insert Field → <em>SheetSet</em> → <em>CurrentSheetRevision</em>.</li>
-            <li>Save & Close → <code>ATTSYNC</code>.</li>
+            <li>Save &amp; Close → <code>ATTSYNC</code>.</li>
           </ol>
+        </details>
+
+        <details>
+          <summary>Final Step: Reprinting</summary>
+          <ol>
+            <li>Use <code>PUBLISH</code> to select all Layouts.</li>
+            <li>Output to PDF → send updated package to customer.</li>
+          </ol>
+          <p class="muted">Also update DATE and change log as needed; project properties can be updated via Sheet Set
+            Manager.</p>
         </details>
       </section>
 
@@ -377,30 +812,142 @@
       <!-- APPENDIX C -->
       <section id="appendix-c" class="card" data-title="appendix c worked example">
         <h2>Appendix C — Worked Example (Existing + New)</h2>
+
         <details open>
-          <summary>Clean Up an Existing Drawing</summary>
+          <summary>Part 1: Organizing an Existing Design</summary>
+          <p><em>Scenario:</em> Drawing has traces, fiducials, adhesive outlines, and notes mixed on random layers.</p>
+          <p><em>Goal:</em> Reorganize geometry, apply Layer States, build Layouts, insert Title Block with attributes,
+            publish multi‑page PDF.</p>
           <ol>
-            <li>Identify categories → create layers (TRACES/FIDUCIALS/ADHESIVE/NOTES).</li>
-            <li>Move objects to correct layers (use <code>MATCHPROP</code>).</li>
-            <li>Create Layer States (Traces/Adhesive/Final).</li>
-            <li>Layout1/2/3 → insert Title Block → viewport + restore preset.</li>
-            <li>Attributes (REV/PROJECT/DATE/DRAWN_BY) → <code>ATTSYNC</code>.</li>
-            <li><code>PUBLISH</code> to multi-page PDF.</li>
+            <li><strong>Identify Geometry Categories</strong> — TRACES, FIDUCIALS, ADHESIVE, NOTES.</li>
+            <li><strong>Create Standard Layers</strong> — <code>LAYER</code>:
+              <ul>
+                <li>TRACES (black, 0.25 mm)</li>
+                <li>FIDUCIALS (red, 0.10 mm)</li>
+                <li>ADHESIVE (grey, 0.10 mm)</li>
+                <li>NOTES (green, 0.09 mm, non‑plot optional)</li>
+              </ul>
+            </li>
+            <li><strong>Move Objects</strong> — use <code>MATCHPROP</code> or manual reassignment.</li>
+            <li><strong>Create Layer States</strong> — <code>LAYERSTATE</code>:
+              <ul>
+                <li>SILVER_TRACES_LAYOUT → TRACES + FIDUCIALS + NOTES</li>
+                <li>ADHESIVE_LAYOUT → ADHESIVE + FIDUCIALS + NOTES</li>
+                <li>FINAL_ASSEMBLY → ALL layers</li>
+              </ul>
+            </li>
+            <li><strong>Create Layouts</strong> — insert Title Block; viewport; scale; restore appropriate Layer State.
+              Rename:
+              <ul>
+                <li>Layout “Silver Traces”</li>
+                <li>Layout “Adhesive”</li>
+                <li>Layout “Final Assembly”</li>
+              </ul>
+            </li>
+            <li><strong>Insert Title Block Attributes</strong> — REV/PROJECT/DRAWN_BY/DATE → <code>ATTSYNC</code>; set
+              REV = A.</li>
+            <li><strong>Plot Multi‑Page PDF</strong> — <code>PUBLISH</code> → check each page.</li>
           </ol>
         </details>
+
         <details>
-          <summary>Start a New Design</summary>
+          <summary>Part 2: Creating a New Design</summary>
           <ol>
-            <li>Open master template.</li>
-            <li>Draw in Model Space using correct layers.</li>
-            <li>Create Layer States and Layouts; insert Title Block.</li>
-            <li>Optional: set up Sheet Set linking for REV.</li>
-            <li>Publish to PDF.</li>
+            <li><strong>Start from Master Template</strong> — <em>ACAD-2019-LITE-MASTER TEMPLATE_10-16-20</em>.</li>
+            <li><strong>Draw in Model Space</strong> — TRACES / FIDUCIALS / ADHESIVE / NOTES layers.</li>
+            <li><strong>Create Layer States</strong> — mirror Part 1 for consistency.</li>
+            <li><strong>Create Layouts</strong> — Title Block + viewport + restore state for each sheet.</li>
+            <li><strong>Fill Title Block Attributes</strong> — e.g., PROJECT = “FHE Smart Label”, REV = A, DATE = today,
+              DRAWN_BY = engineer name.</li>
+            <li><strong>Optional (Advanced): Link to Sheet Set</strong> — <code>SHEETSET</code>; add Layouts; link REV
+              to <em>CurrentSheetRevision</em>.</li>
+            <li><strong>Publish</strong> — <code>PUBLISH</code> to PDF package.</li>
           </ol>
+        </details>
+
+        <details>
+          <summary>Part 3: Benefits of This Workflow</summary>
+          <ul>
+            <li><strong>Consistency:</strong> same structure across drawings.</li>
+            <li><strong>Scalability:</strong> rapid sheet creation using Layer States.</li>
+            <li><strong>Efficiency:</strong> REV/project info updated once via Sheet Set.</li>
+            <li><strong>Clarity:</strong> layers and Layouts easier for new team members.</li>
+            <li><strong>Professional Output:</strong> clean multi‑page PDFs with consistent lineweights.</li>
+          </ul>
         </details>
       </section>
 
+      <!-- APPENDIX D: TROUBLESHOOTING -->
+      <section id="appendix-troubleshooting" class="card" data-title="appendix d troubleshooting">
+        <h2>Appendix D — Missing Files Troubleshooting</h2>
+
+        <details open>
+          <summary>Common File Types</summary>
+          <ul>
+            <li><strong>SHX</strong>: AutoCAD‑specific fonts (<code>Program Files\Autodesk\AutoCAD LT\Fonts</code>).
+            </li>
+            <li><strong>TTF/OTF</strong>: Windows fonts (<code>C:\Windows\Fonts</code>).</li>
+            <li><strong>CTB</strong>: Plot style tables
+              (<code>AppData\Roaming\Autodesk\AutoCAD LT\Plotters\Plot Styles</code>).</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>If a file is listed as “COULD NOT BE LOCATED”</summary>
+          <ol>
+            <li>Note the missing filename (e.g., <em>Futura Md BT.ttf</em> or <em>TT0201M.shx</em>).</li>
+            <li>Ask a co‑worker to search their system in the locations above and send the file.</li>
+            <li>Once received:
+              <ul>
+                <li>SHX → <code>C:\Program Files\Autodesk\AutoCAD LT 20XX\Fonts</code></li>
+                <li>TTF/OTF → Right‑click → <em>Install for all users</em></li>
+                <li>CTB →
+                  <code>C:\Users&lt;UserName&gt;\AppData\Roaming\Autodesk\AutoCAD LT 20XX\enu\Plotters\Plot Styles</code>
+                </li>
+              </ul>
+            </li>
+            <li>Restart AutoCAD LT.</li>
+          </ol>
+        </details>
+
+        <details>
+          <summary>Example: eTransmit report shows missing</summary>
+          <pre>The following files could not be located:
+   
+
+TT0200M.ttf
+TT0201M.ttf
+Futura Md BT.ttf
+color-8mil.ctb</pre>
+          <p><strong>Solution:</strong> Request those fonts/CTB from a co‑worker and install/copy to the proper
+            directories (see above).</p>
+        </details>
+
+
+        <details>
+          <summary>Final Note</summary>
+          <p>If fonts are missing and cannot be obtained, AutoCAD will substitute the <code>FONTALT</code> font (usually
+            <em>simplex.shx</em>). This causes text to appear stretched or overflow boxes—always install the correct
+            fonts to avoid layout issues.</p>
+        </details>
+      </section>
+
+      <!-- BENEFITS SUMMARY -->
+      <section id="benefits" class="card" data-title="benefits">
+        <h2>Benefits Summary</h2>
+        <ul>
+          <li>Use <strong>Layer Manager</strong> to separate geometry and control appearance.</li>
+          <li>Use <strong>Layouts</strong> per sheet with Title Block and viewports.</li>
+          <li>Build <strong>Title Blocks</strong> as blocks with <strong>Attributes</strong> (REV, project info).</li>
+          <li>Use <strong>Block Editor</strong> to manage attributes and geometry centrally.</li>
+          <li>Use <strong>Sheet Set Manager</strong> to push REV updates across sheets.</li>
+          <li>Publish multiple Layouts into one PDF for efficient output.</li>
+        </ul>
+      </section>
+
     </main>
+
+
   </div>
 
   <script>
@@ -431,7 +978,7 @@
     // Copy buttons
     document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', async () => {
       const text = b.getAttribute('data-copy') || b.previousElementSibling?.textContent?.trim() || '';
-      try { await navigator.clipboard.writeText(text); b.textContent = 'Copied!'; setTimeout(()=>{b.textContent='Copy';}, 1200);} catch(e) { alert('Copy failed: '+e); }
+      try { await navigator.clipboard.writeText(text); b.textContent = 'Copied!'; setTimeout(() => { b.textContent = 'Copy'; }, 1200); } catch (e) { alert('Copy failed: ' + e); }
     }));
 
     // Expand / Collapse all details
@@ -464,20 +1011,32 @@
 
     // Persist checklist state
     const list = document.getElementById('fontCheck');
-    const KEY = 'autocad_checklist_fonts_v1';
+    const KEY = 'autocad_checklist_fonts_v2';
     if (list) {
-      // load
       try {
         const saved = JSON.parse(localStorage.getItem(KEY) || '[]');
         const inputs = list.querySelectorAll('input');
         inputs.forEach((inp, i) => inp.checked = !!saved[i]);
-        // save
         list.addEventListener('change', () => {
           const vals = Array.from(list.querySelectorAll('input')).map(i => i.checked);
           localStorage.setItem(KEY, JSON.stringify(vals));
         });
-      } catch {}
+      } catch { }
     }
   </script>
+
+  <!-- FOOTER -->
+<footer class="site-footer">
+  <p>Connect with me on
+    <a href="https://www.linkedin.com/in/marcusfrancisco" target="_blank" rel="noopener">LinkedIn</a>
+    and
+    <a href="https://github.com/marcusfrancisco" target="_blank" rel="noopener">GitHub</a>.
+  </p>
+  <p>© 2025 Marcus Francisco. All rights reserved.</p>
+  <p>Site design, content, and code by Marcus Francisco.</p>
+</footer>
+
+
 </body>
+
 </html>
