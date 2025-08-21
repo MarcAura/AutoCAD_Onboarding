@@ -310,6 +310,131 @@
     .site-footer a:hover {
       text-decoration: underline;
     }
+
+    .gif-container {
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    .gif-loop {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* --- GIF modal and thumb styles --- */
+    .gif-thumb {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      max-width: 100%;
+      height: fit-content;
+      position: relative;
+      display: inline-block;
+      border: 1px solid var(--border);
+      /* overflow: hidden; */
+      cursor: pointer;
+      background: var(--panel);
+      border-radius: 12px;
+      /* border-radius: 6px; */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease;
+    }
+
+
+    .gif-thumb:hover {
+      transform: scale(1.03);
+    }
+
+
+    .gif-thumb img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      opacity: .95;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .gif-thumb:hover img {
+      /* transform: scale(1.02); */
+      opacity: 1;
+    }
+
+    .gif-badge {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+    }
+
+    /* Modal shell */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      /* shown via JS */
+      z-index: 1000;
+    }
+
+    .modal[aria-hidden="false"] {
+      display: block;
+    }
+
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, .7);
+    }
+
+    .modal-content {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+    }
+
+    .modal-content img {
+      max-width: min(1200px, 92vw);
+      max-height: 86vh;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .45);
+      border: 1px solid var(--border);
+      background: var(--panel);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      font-size: 32px;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
+
+    /* Prevent background scroll when modal open */
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .gif-thumb img {
+        transition: none;
+      }
+    }
   </style>
 </head>
 
@@ -407,12 +532,29 @@
 
             <!-- New Card: Fix Jagged Circles/Arcs -->
 
-            <h3>Fix Jagged Circles / Arcs</h3>
-            <ol>
-              <li>Run <code>VIEWRES</code> → when prompted, type <strong>Y</strong> for fast zooms.</li>
-              <li>Enter circle zoom percent: <strong>2000</strong> (try 3000–5000 for extra smooth).</li>
-              <li>Regenerate: <code>REGENALL</code> (or <code>REGEN</code> for current viewport).</li>
-            </ol>
+
+            <div class="grid">
+
+              <div>
+                <h3>Fix Jagged Circles / Arcs</h3>
+                <ol>
+                  <li>Run <code>VIEWRES</code> → when prompted, type <strong>Y</strong> for fast zooms.</li>
+                  <li>Enter circle zoom percent: <strong>2000</strong> (try 3000–5000 for extra smooth).</li>
+                  <li>Regenerate: <code>REGENALL</code> (or <code>REGEN</code> for current viewport).</li>
+                </ol>
+
+              </div>
+
+              <div class="gif-thumb" role="button" tabindex="0" aria-label="Play REGEN GIF"
+                data-gif="assets/REGEN_AutoCAD.mp4">
+                <img src="assets/REGEN_AutoCAD.mp4" alt="REGEN demo">
+              </div>
+
+
+
+
+            </div>
+
             <p class="muted">Note: This changes on‑screen smoothness only; plotted PDFs are smooth regardless.</p>
             <div class="flex">
               <button class="copy" data-copy="VIEWRES">Copy: VIEWRES</button>
@@ -422,7 +564,11 @@
 
 
 
+
+
           </div>
+
+
 
 
           <!-- Card: Freeze All Non-Isolated Layers with LAYISO -->
@@ -473,18 +619,61 @@
 
 
 
+
+
+
+
+        </div>
+
+        <div class="grid">
+
+
+          <div class="card">
+            <h3>Publish Engineering PDF + Film Layouts</h3>
+            <ol>
+              <li><strong>Engineering PDF:</strong>
+                <ol>
+                  <li>Run <code>PUBLISH</code>.</li>
+                  <li>Select all <em>engineering layouts</em> (exclude film layouts).</li>
+                  <li>Set <em>Plotter</em> = <code>DWG To PDF.pc3</code>.</li>
+                  <li>Set <em>Sheet Size</em> = 8.5x11 (or project standard).</li>
+                  <li>Check <em>Single PDF</em> output → Save as Engineering Set.</li>
+                </ol>
+              </li>
+              <li><strong>Film Layouts:</strong>
+                <ol>
+                  <li>Run <code>PUBLISH</code> again.</li>
+                  <li>Select only <em>film layouts</em>.</li>
+                  <li>Set <em>Plotter</em> = Film printer (or export device).</li>
+                  <li>Confirm <em>Plot Style (CTB)</em> = Film-specific (e.g., <code>Film_Trace.ctb</code>).</li>
+                  <li>Output each layout as needed for film production.</li>
+                </ol>
+              </li>
+            </ol>
+            <button class="copy" data-copy="PUBLISH">Copy command: PUBLISH</button>
+          </div>
+
           <!-- New Card: Build Layer State from Selection -->
           <div class="card">
             <h3>Create Layer State from Selection</h3>
             <ol>
-              <li>Show all: <code>LAYON</code> &rarr; <code>LAYTHW</code>.</li>
-              <li>Isolate wanted layers: <code>LAYISO</code> &rarr; select objects &rarr; Enter.</li>
-              <li>Save preset: <code>LAYERSTATE</code> &rarr; <em>New</em> (e.g., <em>SILVER_TRACES_LAYOUT</em>).</li>
-              <li>Restore anywhere (Model or active viewport): <code>LAYERSTATE</code> &rarr; <em>Restore</em>.</li>
-              <li>Back to normal: <code>LAYUNISO</code> (and <code>LAYTHW</code> if needed).</li>
+              <li>Turn everything on: <code>LAYON</code></li>
+              <li>Thaw all layers: <code>LAYTHW</code></li>
+              <li>Isolate layers of selected objects: <code>LAYISO</code> → select objects → Enter</li>
+              <list>
+                <item>Choose <em>Off</em> or <em>Freeze</em> to hide non-isolated layers</item>
+
+              </list>
+
+              <li>Save this view as a preset: <code>LAYERSTATE</code> → <em>New</em> (name it clearly, e.g.,
+                <em>SILVER_TRACES_LAYOUT</em>)
+              </li>
+              <li>Restore anywhere (Model or specific viewport): <code>LAYERSTATE</code> → <em>Restore</em></li>
+              <li>Return to full drawing: <code>LAYUNISO</code> → (and <code>LAYTHW</code> if needed)</li>
             </ol>
-            <p class="muted">Tip: For viewport-only isolation with better performance, freeze others with
-              <code>VPLAYER</code> &rarr; <em>Freeze</em> &rarr; <em>Current</em> viewport.
+            <p class="muted">
+              💡 Tip: For viewport-only control, use <code>VPLAYER</code> → <em>Freeze</em> → <em>Current viewport</em>
+              to hide layers only in that viewport without affecting Model space.
             </p>
             <div class="flex">
               <button class="copy" data-copy="LAYON">Copy: LAYON</button>
@@ -497,10 +686,8 @@
           </div>
 
 
-
-
-
         </div>
+
         <p class="tip">Tip: Toggle on‑screen lineweights with <kbd class="kbd">LWDISPLAY</kbd> → <kbd
             class="kbd">ON</kbd>. Toggle OSNAP with <kbd class="kbd">F3</kbd>; grid snap with <kbd class="kbd">F9</kbd>.
         </p>
@@ -1078,6 +1265,17 @@ color-8mil.ctb</pre>
 
   </div>
 
+
+  <!-- Shared GIF Modal (one per page) right above script -->
+  <div id="gifModal" class="modal" aria-hidden="true" role="dialog" aria-label="GIF Player">
+    <div class="modal-backdrop" data-close="true"></div>
+    <div class="modal-content" role="document">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <img id="gifPlayer" src="" alt="GIF playback" />
+    </div>
+  </div>
+
+
   <script>
     // Theme toggle with persistence
     const root = document.documentElement;
@@ -1151,6 +1349,64 @@ color-8mil.ctb</pre>
         });
       } catch { }
     }
+
+/* ---------- Reusable GIF modal logic (multi-card) ---------- */
+(() => {
+  const modal = document.getElementById('gifModal');
+  const img = document.getElementById('gifPlayer');
+  const closeBtn = modal?.querySelector('.modal-close');
+  let lastTrigger = null;
+
+  function openModal(gifSrc, triggerEl) {
+    lastTrigger = triggerEl || null;
+
+    // Always restart the GIF
+    img.src = '';
+    img.src = gifSrc;
+
+    // Show via ARIA (no inline display toggles)
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    closeBtn?.focus({ preventScroll: true });
+  }
+
+  function closeModal() {
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    img.src = ''; // stop playback so next open restarts
+
+    // Return focus to opener (accessibility)
+    if (lastTrigger && typeof lastTrigger.focus === 'function') {
+      lastTrigger.focus();
+    }
+  }
+
+  // Open on any .gif-trigger or .gif-thumb (event delegation)
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('.gif-trigger, .gif-thumb');
+    if (trigger && trigger.dataset.gif) {
+      e.preventDefault();
+      openModal(trigger.dataset.gif, trigger);
+      return;
+    }
+
+    // Close on ANY click inside the modal (image, backdrop, or X)
+    if (e.target.closest('#gifModal')) {
+      e.preventDefault();
+      closeModal();
+    }
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (modal.getAttribute('aria-hidden') === 'false' && e.key === 'Escape') {
+      e.preventDefault();
+      closeModal();
+    }
+  });
+})();
+
+ 
   </script>
 
   <!-- FOOTER -->
