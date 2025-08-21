@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AutoCAD LT Interactive Onboarding & Layouts Tutorial</title>
+  <title>The AutoCAD LT Navigator</title>
   <style>
     :root {
       --bg: #0b1120;
@@ -336,6 +336,8 @@
       cursor: pointer;
       background: var(--panel);
       border-radius: 12px;
+      overflow: hidden;
+      /* ensures child image is clipped to rounded corners */
       /* border-radius: 6px; */
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       transition: transform 0.2s ease;
@@ -353,6 +355,7 @@
       height: auto;
       opacity: .95;
       transition: transform .2s ease, opacity .2s ease;
+      border-radius: 12px;
     }
 
     .gif-thumb:hover img {
@@ -435,13 +438,45 @@
         transition: none;
       }
     }
+
+    /* Collapsible details styling for large cards */
+    .collapse {
+      margin-top: 10px;
+    }
+
+    .collapse-summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 600;
+      padding: 10px 12px;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      user-select: none;
+    }
+
+    /* Hide default marker and add our own chevron */
+    .collapse-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .collapse-summary::after {
+      content: "▸";
+      float: right;
+      transition: transform .2s ease;
+      opacity: .7;
+    }
+
+    details[open] .collapse-summary::after {
+      transform: rotate(90deg);
+      opacity: 1;
+    }
   </style>
 </head>
 
 <body>
   <div class="app" id="app">
     <nav>
-      <h1>Marcus's AutoCAD LT Tutorial</h1>
+      <h1>Marcus's AutoCAD LT Guide</h1>
       <div class="search">
         <input id="search" placeholder="Search steps…" aria-label="Search" />
       </div>
@@ -504,7 +539,7 @@
 
       <!-- QUICK START -->
       <section id="quickstart" class="card" data-title="quick start">
-        <h2>Quick Start (Most‑Used Actions)</h2>
+        <h2>Quick Reference (Most‑Used Actions)</h2>
         <div class="grid">
           <div class="card">
             <h3>Update REV on All Sheets</h3>
@@ -546,8 +581,8 @@
               </div>
 
               <div class="gif-thumb" role="button" tabindex="0" aria-label="Play REGEN GIF"
-                data-gif="assets/REGEN_AutoCAD.mp4">
-                <img src="assets/REGEN_AutoCAD.mp4" alt="REGEN demo">
+                data-gif="assets/REGEN_AutoCAD.gif">
+                <img src="assets/REGEN_AutoCAD.gif" alt="REGEN demo">
               </div>
 
 
@@ -571,58 +606,86 @@
 
 
 
-          <!-- Card: Freeze All Non-Isolated Layers with LAYISO -->
+          <!-- Card: Freeze All Non-Isolated Layers with LAYISO (collapsible) -->
           <div class="card">
             <h2>Freeze Non-Isolated Layers with LAYISO</h2>
             <p>
               <strong>LAYISO</strong> can do more than lock layers—by changing its settings you can
-              <em>freeze or turn off all non-selected layers</em>.
+              <em>freeze or turn off all non‑selected layers</em>.
             </p>
+
+
             <ol>
-              <li>Type <code>LAYISO</code> in the command line.</li>
-              <li>Before selecting objects, type <strong>S</strong> (Settings).</li>
-              <li>At the prompt:
-                <pre>Enter setting for layers to be isolated 
-[Off/Lock and fade/Lock and dim] &lt;Lock and fade&gt;:</pre>
-                type <strong>O</strong> (for Off).
+              <li>Type <code>LAYISO</code> in the command line and type S for settings.</li>
+              <pre> [Off/Lock and fade/Lock and dim] &lt;Lock and fade&gt;:</pre>
+              type <strong>O</strong> (for Off) or just select <code>[Off]</code>.
               </li>
               <li>If you are in <strong>Paper Space</strong>, AutoCAD will ask:<br>
                 <pre>In Paper Space viewport use [VPFreeze/Off] &lt;Off&gt;:</pre>
-                - Choose <strong>VPFreeze</strong> to freeze layers <em>only in the current viewport</em>.<br>
-                - Choose <strong>Off</strong> to hide them globally.
+                Choose <strong>VPFreeze</strong> to freeze layers <em>only in the current viewport</em> or
+                <strong>Off</strong> to hide them globally.
               </li>
               <li>Select the objects whose layers you want to keep visible.</li>
-              <li>Press <strong>Enter</strong>.
-                Non-selected layers are now frozen (disappear).
-              </li>
+              <li>Press <strong>Enter</strong>. Non‑selected layers are now frozen (disappear).</li>
             </ol>
-            <p>
-              ✅ To restore everything, type <code>LAYUNISO</code>.
-            </p>
 
-            <h3>Isolate Selected Layers</h3>
-            <ol>
-              <li>Select objects you want to keep visible.</li>
-              <li>Run <code>LAYISO</code> → all other layers are temporarily hidden (frozen in view).</li>
-            </ol>
-            <button class="copy" data-copy="LAYISO">Copy command: LAYISO</button>
-            <h3>Freeze Layer by Selection</h3>
-            <ol>
-              <li>Run <code>LAYFRZ</code>.</li>
-              <li>Select any object → its entire layer is frozen.</li>
-            </ol>
-            <button class="copy" data-copy="LAYFRZ">Copy command: LAYFRZ</button>
+            <!-- <p>✅ To restore everything, type <code>LAYUNISO</code>.</p> -->
 
+            <details class="collapse">
+              <summary class="collapse-summary">Additional Layer Commands</summary>
+
+              <h3>Isolate Selected Layers</h3>
+              <ol>
+                <li>Select objects you want to keep visible.</li>
+                <li>Run <code>LAYISO</code> → all other layers are temporarily hidden (frozen in view).</li>
+              </ol>
+              <button class="copy" data-copy="LAYISO">Copy command: LAYISO</button>
+
+              <h3>Freeze Layer by Selection</h3>
+              <ol>
+                <li>Run <code>LAYFRZ</code>.</li>
+                <li>Select any object → its entire layer is frozen.</li>
+              </ol>
+              <button class="copy" data-copy="LAYFRZ">Copy command: LAYFRZ</button>
+
+              <h3>Thaw Frozen Layers</h3>
+              <p><code>LAYTHAW</code> restores (unfreezes) layers that were frozen with <code>LAYFRZ</code> or
+                <code>LAYISO</code>.</p>
+              <button class="copy" data-copy="LAYTHAW">Copy command: LAYTHAW</button>
+
+              <h3>Turn All Layers On</h3>
+              <p><code>LAYON</code> turns on all layers that were previously turned off.</p>
+              <button class="copy" data-copy="LAYON">Copy command: LAYON</button>
+
+              <h3>Turn Off Layers</h3>
+              <p><code>LAYOFF</code> hides selected layers (they remain in the drawing but invisible).</p>
+              <button class="copy" data-copy="LAYOFF">Copy command: LAYOFF</button>
+
+              <h3>Unlock Layers</h3>
+              <p><code>LAYULK</code> unlocks layers that were locked with <code>LAYLCK</code>.</p>
+              <button class="copy" data-copy="LAYULK">Copy command: LAYULK</button>
+
+              <h3>Lock Layers</h3>
+              <p><code>LAYLCK</code> locks selected layers to prevent editing but still shows them in the drawing.</p>
+              <button class="copy" data-copy="LAYLCK">Copy command: LAYLCK</button>
+
+              <h3>Merge Layers</h3>
+              <p><code>LAYMRG</code> merges selected layers into another target layer. The originals are deleted.</p>
+              <button class="copy" data-copy="LAYMRG">Copy command: LAYMRG</button>
+
+              <h3>Delete Unused Layers</h3>
+              <p><code>LAYDEL</code> deletes selected layers (must be empty of objects first, except 0 and Defpoints).
+              </p>
+              <button class="copy" data-copy="LAYDEL">Copy command: LAYDEL</button>
+
+              <h3>Restore Previous Layer State</h3>
+              <p><code>LAYUNISO</code> restores all layers to the state before the last <code>LAYISO</code>.</p>
+              <button class="copy" data-copy="LAYUNISO">Copy command: LAYUNISO</button>
+
+            </details>
 
 
           </div>
-
-
-
-
-
-
-
         </div>
 
         <div class="grid">
@@ -659,11 +722,9 @@
             <ol>
               <li>Turn everything on: <code>LAYON</code></li>
               <li>Thaw all layers: <code>LAYTHW</code></li>
-              <li>Isolate layers of selected objects: <code>LAYISO</code> → select objects → Enter</li>
-              <list>
-                <item>Choose <em>Off</em> or <em>Freeze</em> to hide non-isolated layers</item>
+              <li>Isolate layers of selected objects: <code>LAYISO</code>→ [Settings] (at bottom of screen) → Off → Off
+                → select objects → Enter</li>
 
-              </list>
 
               <li>Save this view as a preset: <code>LAYERSTATE</code> → <em>New</em> (name it clearly, e.g.,
                 <em>SILVER_TRACES_LAYOUT</em>)
@@ -1349,64 +1410,65 @@ color-8mil.ctb</pre>
         });
       } catch { }
     }
+    /* ---------- Reusable GIF modal logic (multi-card) ---------- */
+    (() => {
+      const modal = document.getElementById('gifModal');
+      const img = document.getElementById('gifPlayer');
+      const closeBtn = modal?.querySelector('.modal-close');
+      let lastTrigger = null;
 
-/* ---------- Reusable GIF modal logic (multi-card) ---------- */
-(() => {
-  const modal = document.getElementById('gifModal');
-  const img = document.getElementById('gifPlayer');
-  const closeBtn = modal?.querySelector('.modal-close');
-  let lastTrigger = null;
+      function openModal(gifSrc, triggerEl) {
+        lastTrigger = triggerEl || null;
 
-  function openModal(gifSrc, triggerEl) {
-    lastTrigger = triggerEl || null;
+        // Build a fresh URL each time to defeat caching and restart the GIF
+        const u = new URL(gifSrc, window.location.href);
+        u.searchParams.set('cb', Date.now()); // cache-buster
 
-    // Always restart the GIF
-    img.src = '';
-    img.src = gifSrc;
+        // Reset src first, then assign the fresh URL
+        img.removeAttribute('src');
+        img.src = u.toString();
 
-    // Show via ARIA (no inline display toggles)
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('modal-open');
-    closeBtn?.focus({ preventScroll: true });
-  }
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        closeBtn?.focus({ preventScroll: true });
+      }
 
-  function closeModal() {
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('modal-open');
-    img.src = ''; // stop playback so next open restarts
 
-    // Return focus to opener (accessibility)
-    if (lastTrigger && typeof lastTrigger.focus === 'function') {
-      lastTrigger.focus();
-    }
-  }
+      function closeModal() {
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        img.src = ''; // unload so next open starts fresh
+        if (lastTrigger && typeof lastTrigger.focus === 'function') {
+          lastTrigger.focus();
+        }
+      }
 
-  // Open on any .gif-trigger or .gif-thumb (event delegation)
-  document.addEventListener('click', (e) => {
-    const trigger = e.target.closest('.gif-trigger, .gif-thumb');
-    if (trigger && trigger.dataset.gif) {
-      e.preventDefault();
-      openModal(trigger.dataset.gif, trigger);
-      return;
-    }
+      // Open
+      document.addEventListener('click', (e) => {
+        const trigger = e.target.closest('.gif-trigger, .gif-thumb');
+        if (trigger && trigger.dataset.gif) {
+          e.preventDefault();
+          openModal(trigger.dataset.gif, trigger);
+          return;
+        }
 
-    // Close on ANY click inside the modal (image, backdrop, or X)
-    if (e.target.closest('#gifModal')) {
-      e.preventDefault();
-      closeModal();
-    }
-  });
+        // Close on any click inside modal
+        if (e.target.closest('#gifModal')) {
+          e.preventDefault();
+          closeModal();
+        }
+      });
 
-  // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (modal.getAttribute('aria-hidden') === 'false' && e.key === 'Escape') {
-      e.preventDefault();
-      closeModal();
-    }
-  });
-})();
+      // Close on Escape
+      document.addEventListener('keydown', (e) => {
+        if (modal.getAttribute('aria-hidden') === 'false' && e.key === 'Escape') {
+          e.preventDefault();
+          closeModal();
+        }
+      });
+    })();
 
- 
+
   </script>
 
   <!-- FOOTER -->
