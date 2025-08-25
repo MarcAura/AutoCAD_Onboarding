@@ -605,6 +605,143 @@
 
 
 
+<!-- Card: 11x17 Layout + 1:1 Viewport + Lock + Layer State -->
+<div class="card">
+  <h2>Set 11×17 Layout, Make 1:1 Viewport, Lock it, Apply Layer State</h2>
+
+  <ol>
+    <li><strong>Set the Layout to 11×17</strong>
+      <ol>
+        <li>Run <code>PAGESETUP</code> → select your layout → <em>Modify</em>.</li>
+        <li>Printer/Plotter: pick your PDF device (e.g., <code>DWG To PDF.pc3</code>).</li>
+        <li>Paper size: choose <strong>ANSI B (11.00 x 17.00 Inches)</strong>.</li>
+        <li>Plot area: <strong>Layout</strong> • Plot scale: <strong>1 = 1</strong> • Orientation: as needed.</li>
+        <li>OK → <em>Set Current</em> if prompted.</li>
+      </ol>
+      <button class="copy" data-copy="PAGESETUP">Copy: PAGESETUP</button>
+    </li>
+
+    <li><strong>Create a viewport</strong>
+      <ol>
+        <li>In the Layout tab, type <code>MV</code> and draw a rectangular viewport inside the border.</li>
+      </ol>
+      <button class="copy" data-copy="MV">Copy: MV</button>
+    </li>
+
+    <li><strong>Set the viewport to 1:1</strong>
+      <ol>
+        <li>Double‑click <em>inside</em> the viewport to activate it.</li>
+        <li>Use the Status Bar <em>Viewport Scale</em> control → choose <strong>1:1</strong>, <em>or</em> type:
+          <pre style="margin-top:6px">Z ↵
+1XP ↵</pre>
+        </li>
+      </ol>
+      <button class="copy" data-copy="Z">Copy: Z</button>
+    </li>
+
+    <li><strong>Lock the viewport</strong>
+      <ol>
+        <li>Double‑click <em>outside</em> to return to Paper Space, then select the viewport frame.</li>
+        <li>On the Status Bar, click the <strong>Lock</strong> (padlock) icon → <strong>Locked</strong>.
+          <br><em>(Or in Properties: Display Locked = Yes.)</em>
+        </li>
+      </ol>
+    </li>
+
+    <li><strong>Apply a Layer State to this viewport</strong>
+      <ol>
+        <li>Double‑click back <em>inside</em> the viewport to activate it.</li>
+        <li>Run <code>LAYERSTATE</code> → select your preset (e.g., <em>SILVER_TRACES_LAYOUT</em>) → <strong>Restore</strong>.</li>
+        <li>(Optional) Use <code>VPLAYER</code> → <em>Freeze</em> → <em>Current viewport</em> for per‑viewport tweaks.</li>
+      </ol>
+      <div class="flex">
+        <button class="copy" data-copy="LAYERSTATE">Copy: LAYERSTATE</button>
+        <button class="copy" data-copy="VPLAYER">Copy: VPLAYER</button>
+      </div>
+    </li>
+  </ol>
+
+  <p class="tip">Pro tip: After you’ve got scale and layers dialed in, keep the viewport <strong>locked</strong> to prevent accidental zooms.</p>
+</div>
+
+
+<!-- Card: Fix "External References Missing" & How to Keep Assets with the DWG -->
+<div class="card">
+  <h2>Stop “External References Missing” (Images & Xrefs)</h2>
+  <p>
+    AutoCAD <strong>does not embed raster images</strong> (JPG/PNG/TIF) into a DWG. They are linked by path.
+    DWG xrefs <em>can</em> be embedded by <strong>Bind</strong>. Use the steps below to make files portable and
+    eliminate missing‑reference popups.
+  </p>
+
+  <details class="collapse" open>
+    <summary class="collapse-summary">Quick Fix Checklist</summary>
+    <ol>
+      <li><strong>Use Relative Paths by Default</strong>
+        <ol>
+          <li>Set <code>REFPATHTYPE</code> = <strong>2</strong> (Relative) so new attachments store relative paths.</li>
+          <li>Keep the DWG and all images in the <em>same folder</em> (or subfolders) so the relative links resolve.</li>
+        </ol>
+        <button class="copy" data-copy="REFPATHTYPE">Copy: REFPATHTYPE</button>
+      </li>
+
+      <li><strong>Repath Missing Items</strong>
+        <ol>
+          <li>Open the <code>XREF</code> palette (covers DWG xrefs, images, PDFs, etc.).</li>
+          <li>Right‑click each missing reference → <em>Change Path</em> → browse to the correct file.</li>
+          <li>Then right‑click → <em>Path</em> → <strong>Make Relative</strong> (if available).</li>
+        </ol>
+        <button class="copy" data-copy="XREF">Copy: XREF</button>
+      </li>
+
+      <li><strong>Package Everything to Send</strong>
+        <ol>
+          <li>Run <code>ETRANSMIT</code> → choose ZIP.</li>
+          <li>Turn on: <em>Include fonts, plot styles, and all referenced files</em>.</li>
+          <li>Send the ZIP—recipient won’t see missing refs.</li>
+        </ol>
+        <button class="copy" data-copy="ETRANSMIT">Copy: ETRANSMIT</button>
+      </li>
+    </ol>
+  </details>
+
+  <details class="collapse">
+    <summary class="collapse-summary">If you truly need “everything inside one DWG”</summary>
+    <h3>DWG Xrefs → Bind into the host</h3>
+    <ol>
+      <li>Open <code>XREF</code> → select the DWG xref → <em>Bind…</em></li>
+      <li>Choose <strong>Bind</strong> (flattens into current drawing’s layers) or <strong>Insert</strong> (merges layers by name).</li>
+    </ol>
+    <div class="flex">
+      <button class="copy" data-copy="XREF">Copy: XREF</button>
+      <button class="copy" data-copy="-XREF BIND">Copy: -XREF BIND</button>
+    </div>
+
+    <h3>Images (JPG/PNG/TIF) → Not embeddable</h3>
+    <ul>
+      <li>AutoCAD keeps raster images as <em>external</em> links. Best practice is <strong>relative paths + eTransmit</strong>.</li>
+      <li><em>Workaround (not ideal):</em> Paste as OLE (<code>PASTESPEC</code> → Picture/Metafile) to “embed,”
+        but quality/scale control is limited and file size can bloat.</li>
+    </ul>
+    <button class="copy" data-copy="PASTESPEC">Copy: PASTESPEC</button>
+  </details>
+
+  <details class="collapse">
+    <summary class="collapse-summary">Best‑practice setup (prevents future popups)</summary>
+    <ul>
+      <li>Project folder structure: 
+        <code>Project\DWG</code>, <code>Project\Xrefs</code>, <code>Project\Images</code>.</li>
+      <li>Place the DWG at <code>Project\DWG</code>; attach xrefs/images from sibling folders → paths will be relative.</li>
+      <li>Set <code>REFPATHTYPE=2</code> in your template so new attachments are always relative.</li>
+      <li>When sharing, always use <code>ETRANSMIT</code> ZIP.</li>
+    </ul>
+  </details>
+
+  <p class="tip">Tip: If you move the project folder as a whole, relative links keep working—no repath needed.</p>
+</div>
+
+
+
 
           <!-- Card: Freeze All Non-Isolated Layers with LAYISO (collapsible) -->
           <div class="card">
@@ -745,6 +882,10 @@
               <button class="copy" data-copy="VPLAYER">Copy: VPLAYER</button>
             </div>
           </div>
+
+
+
+
 
 
         </div>
