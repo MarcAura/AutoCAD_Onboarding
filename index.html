@@ -492,6 +492,8 @@
         <li><a href="#block-editor">Block Editor</a></li>
         <li><a href="#attributes">Attributes</a></li>
         <li><a href="#title-block">Title Block + Attr</a></li>
+        <li><a href="#parameters">Parameters</a></li>
+        <li><a href="#hatch">Hatch</a></li>
         <li><a href="#sheet-set">Sheet Set Manager</a></li>
         <li><a href="#printing">Multi‑Sheet Printing</a></li>
         <li><a href="#appendix-a">Appendix A (Rev)</a></li>
@@ -605,140 +607,156 @@
 
 
 
-<!-- Card: 11x17 Layout + 1:1 Viewport + Lock + Layer State -->
-<div class="card">
-  <h2>Set 11×17 Layout, Make 1:1 Viewport, Lock it, Apply Layer State</h2>
+          <!-- Card: 11x17 Layout + 1:1 Viewport + Lock + Layer State -->
+          <div class="card">
+            <h2>Set 11×17 Layout, Make 1:1 Viewport, Lock it, Apply Layer State</h2>
 
-  <ol>
-    <li><strong>Set the Layout to 11×17</strong>
-      <ol>
-        <li>Run <code>PAGESETUP</code> → select your layout → <em>Modify</em>.</li>
-        <li>Printer/Plotter: pick your PDF device (e.g., <code>DWG To PDF.pc3</code>).</li>
-        <li>Paper size: choose <strong>ANSI B (11.00 x 17.00 Inches)</strong>.</li>
-        <li>Plot area: <strong>Layout</strong> • Plot scale: <strong>1 = 1</strong> • Orientation: as needed.</li>
-        <li>OK → <em>Set Current</em> if prompted.</li>
-      </ol>
-      <button class="copy" data-copy="PAGESETUP">Copy: PAGESETUP</button>
-    </li>
+            <ol>
+              <li><strong>Set the Layout to 11×17</strong>
+                <ol>
+                  <li>Run <code>PAGESETUP</code> → select your layout → <em>Modify</em>.</li>
+                  <li>Printer/Plotter: pick your PDF device (e.g., <code>DWG To PDF.pc3</code>).</li>
+                  <li>Paper size: choose <strong>ANSI B (11.00 x 17.00 Inches)</strong>.</li>
+                  <li>Plot area: <strong>Layout</strong> • Plot scale: <strong>1 = 1</strong> • Orientation: as needed.
+                  </li>
+                  <li>OK → <em>Set Current</em> if prompted.</li>
+                </ol>
+                <button class="copy" data-copy="PAGESETUP">Copy: PAGESETUP</button>
+              </li>
 
-    <li><strong>Create a viewport</strong>
-      <ol>
-        <li>In the Layout tab, type <code>MV</code> and draw a rectangular viewport inside the border.</li>
-      </ol>
-      <button class="copy" data-copy="MV">Copy: MV</button>
-    </li>
+              <li><strong>Create a viewport</strong>
+                <ol>
+                  <li>In the Layout tab, type <code>MV</code> and draw a rectangular viewport inside the border.</li>
+                </ol>
+                <button class="copy" data-copy="MV">Copy: MV</button>
+              </li>
 
-    <li><strong>Set the viewport to 1:1</strong>
-      <ol>
-        <li>Double‑click <em>inside</em> the viewport to activate it.</li>
-        <li>Use the Status Bar <em>Viewport Scale</em> control → choose <strong>1:1</strong>, <em>or</em> type:
-          <pre style="margin-top:6px">Z ↵
+              <li><strong>Set the viewport to 1:1</strong>
+                <ol>
+                  <li>Double‑click <em>inside</em> the viewport to activate it.</li>
+                  <li>Use the Status Bar <em>Viewport Scale</em> control → choose <strong>1:1</strong>, <em>or</em>
+                    type:
+                    <pre style="margin-top:6px">Z ↵
 1XP ↵</pre>
-        </li>
-      </ol>
-      <button class="copy" data-copy="Z">Copy: Z</button>
-    </li>
+                  </li>
+                </ol>
+                <button class="copy" data-copy="Z">Copy: Z</button>
+              </li>
 
-    <li><strong>Lock the viewport</strong>
-      <ol>
-        <li>Double‑click <em>outside</em> to return to Paper Space, then select the viewport frame.</li>
-        <li>On the Status Bar, click the <strong>Lock</strong> (padlock) icon → <strong>Locked</strong>.
-          <br><em>(Or in Properties: Display Locked = Yes.)</em>
-        </li>
-      </ol>
-    </li>
+              <li><strong>Lock the viewport</strong>
+                <ol>
+                  <li>Double‑click <em>outside</em> to return to Paper Space, then select the viewport frame.</li>
+                  <li>On the Status Bar, click the <strong>Lock</strong> (padlock) icon → <strong>Locked</strong>.
+                    <br><em>(Or in Properties: Display Locked = Yes.)</em>
+                  </li>
+                </ol>
+              </li>
 
-    <li><strong>Apply a Layer State to this viewport</strong>
-      <ol>
-        <li>Double‑click back <em>inside</em> the viewport to activate it.</li>
-        <li>Run <code>LAYERSTATE</code> → select your preset (e.g., <em>SILVER_TRACES_LAYOUT</em>) → <strong>Restore</strong>.</li>
-        <li>(Optional) Use <code>VPLAYER</code> → <em>Freeze</em> → <em>Current viewport</em> for per‑viewport tweaks.</li>
-      </ol>
-      <div class="flex">
-        <button class="copy" data-copy="LAYERSTATE">Copy: LAYERSTATE</button>
-        <button class="copy" data-copy="VPLAYER">Copy: VPLAYER</button>
-      </div>
-    </li>
-  </ol>
+              <li><strong>Apply a Layer State to this viewport</strong>
+                <ol>
+                  <li>Double‑click back <em>inside</em> the viewport to activate it.</li>
+                  <li>Run <code>LAYERSTATE</code> → select your preset (e.g., <em>SILVER_TRACES_LAYOUT</em>) →
+                    <strong>Restore</strong>.
+                  </li>
+                  <li>(Optional) Use <code>VPLAYER</code> → <em>Freeze</em> → <em>Current viewport</em> for per‑viewport
+                    tweaks.</li>
+                </ol>
+                <div class="flex">
+                  <button class="copy" data-copy="LAYERSTATE">Copy: LAYERSTATE</button>
+                  <button class="copy" data-copy="VPLAYER">Copy: VPLAYER</button>
+                </div>
+              </li>
+            </ol>
 
-  <p class="tip">Pro tip: After you’ve got scale and layers dialed in, keep the viewport <strong>locked</strong> to prevent accidental zooms.</p>
-</div>
+            <p class="tip">Pro tip: After you’ve got scale and layers dialed in, keep the viewport
+              <strong>locked</strong> to prevent accidental zooms.
+            </p>
+          </div>
 
 
-<!-- Card: Fix "External References Missing" & How to Keep Assets with the DWG -->
-<div class="card">
-  <h2>Stop “External References Missing” (Images & Xrefs)</h2>
-  <p>
-    AutoCAD <strong>does not embed raster images</strong> (JPG/PNG/TIF) into a DWG. They are linked by path.
-    DWG xrefs <em>can</em> be embedded by <strong>Bind</strong>. Use the steps below to make files portable and
-    eliminate missing‑reference popups.
-  </p>
+          <!-- Card: Fix "External References Missing" & How to Keep Assets with the DWG -->
+          <div class="card">
+            <h2>Stop “External References Missing” (Images & Xrefs)</h2>
+            <p>
+              AutoCAD <strong>does not embed raster images</strong> (JPG/PNG/TIF) into a DWG. They are linked by path.
+              DWG xrefs <em>can</em> be embedded by <strong>Bind</strong>. Use the steps below to make files portable
+              and
+              eliminate missing‑reference popups.
+            </p>
 
-  <details class="collapse" open>
-    <summary class="collapse-summary">Quick Fix Checklist</summary>
-    <ol>
-      <li><strong>Use Relative Paths by Default</strong>
-        <ol>
-          <li>Set <code>REFPATHTYPE</code> = <strong>2</strong> (Relative) so new attachments store relative paths.</li>
-          <li>Keep the DWG and all images in the <em>same folder</em> (or subfolders) so the relative links resolve.</li>
-        </ol>
-        <button class="copy" data-copy="REFPATHTYPE">Copy: REFPATHTYPE</button>
-      </li>
+            <details class="collapse" open>
+              <summary class="collapse-summary">Quick Fix Checklist</summary>
+              <ol>
+                <li><strong>Use Relative Paths by Default</strong>
+                  <ol>
+                    <li>Set <code>REFPATHTYPE</code> = <strong>2</strong> (Relative) so new attachments store relative
+                      paths.</li>
+                    <li>Keep the DWG and all images in the <em>same folder</em> (or subfolders) so the relative links
+                      resolve.</li>
+                  </ol>
+                  <button class="copy" data-copy="REFPATHTYPE">Copy: REFPATHTYPE</button>
+                </li>
 
-      <li><strong>Repath Missing Items</strong>
-        <ol>
-          <li>Open the <code>XREF</code> palette (covers DWG xrefs, images, PDFs, etc.).</li>
-          <li>Right‑click each missing reference → <em>Change Path</em> → browse to the correct file.</li>
-          <li>Then right‑click → <em>Path</em> → <strong>Make Relative</strong> (if available).</li>
-        </ol>
-        <button class="copy" data-copy="XREF">Copy: XREF</button>
-      </li>
+                <li><strong>Repath Missing Items</strong>
+                  <ol>
+                    <li>Open the <code>XREF</code> palette (covers DWG xrefs, images, PDFs, etc.).</li>
+                    <li>Right‑click each missing reference → <em>Change Path</em> → browse to the correct file.</li>
+                    <li>Then right‑click → <em>Path</em> → <strong>Make Relative</strong> (if available).</li>
+                  </ol>
+                  <button class="copy" data-copy="XREF">Copy: XREF</button>
+                </li>
 
-      <li><strong>Package Everything to Send</strong>
-        <ol>
-          <li>Run <code>ETRANSMIT</code> → choose ZIP.</li>
-          <li>Turn on: <em>Include fonts, plot styles, and all referenced files</em>.</li>
-          <li>Send the ZIP—recipient won’t see missing refs.</li>
-        </ol>
-        <button class="copy" data-copy="ETRANSMIT">Copy: ETRANSMIT</button>
-      </li>
-    </ol>
-  </details>
+                <li><strong>Package Everything to Send</strong>
+                  <ol>
+                    <li>Run <code>ETRANSMIT</code> → choose ZIP.</li>
+                    <li>Turn on: <em>Include fonts, plot styles, and all referenced files</em>.</li>
+                    <li>Send the ZIP—recipient won’t see missing refs.</li>
+                  </ol>
+                  <button class="copy" data-copy="ETRANSMIT">Copy: ETRANSMIT</button>
+                </li>
+              </ol>
+            </details>
 
-  <details class="collapse">
-    <summary class="collapse-summary">If you truly need “everything inside one DWG”</summary>
-    <h3>DWG Xrefs → Bind into the host</h3>
-    <ol>
-      <li>Open <code>XREF</code> → select the DWG xref → <em>Bind…</em></li>
-      <li>Choose <strong>Bind</strong> (flattens into current drawing’s layers) or <strong>Insert</strong> (merges layers by name).</li>
-    </ol>
-    <div class="flex">
-      <button class="copy" data-copy="XREF">Copy: XREF</button>
-      <button class="copy" data-copy="-XREF BIND">Copy: -XREF BIND</button>
-    </div>
+            <details class="collapse">
+              <summary class="collapse-summary">If you truly need “everything inside one DWG”</summary>
+              <h3>DWG Xrefs → Bind into the host</h3>
+              <ol>
+                <li>Open <code>XREF</code> → select the DWG xref → <em>Bind…</em></li>
+                <li>Choose <strong>Bind</strong> (flattens into current drawing’s layers) or <strong>Insert</strong>
+                  (merges layers by name).</li>
+              </ol>
+              <div class="flex">
+                <button class="copy" data-copy="XREF">Copy: XREF</button>
+                <button class="copy" data-copy="-XREF BIND">Copy: -XREF BIND</button>
+              </div>
 
-    <h3>Images (JPG/PNG/TIF) → Not embeddable</h3>
-    <ul>
-      <li>AutoCAD keeps raster images as <em>external</em> links. Best practice is <strong>relative paths + eTransmit</strong>.</li>
-      <li><em>Workaround (not ideal):</em> Paste as OLE (<code>PASTESPEC</code> → Picture/Metafile) to “embed,”
-        but quality/scale control is limited and file size can bloat.</li>
-    </ul>
-    <button class="copy" data-copy="PASTESPEC">Copy: PASTESPEC</button>
-  </details>
+              <h3>Images (JPG/PNG/TIF) → Not embeddable</h3>
+              <ul>
+                <li>AutoCAD keeps raster images as <em>external</em> links. Best practice is <strong>relative paths +
+                    eTransmit</strong>.</li>
+                <li><em>Workaround (not ideal):</em> Paste as OLE (<code>PASTESPEC</code> → Picture/Metafile) to
+                  “embed,”
+                  but quality/scale control is limited and file size can bloat.</li>
+              </ul>
+              <button class="copy" data-copy="PASTESPEC">Copy: PASTESPEC</button>
+            </details>
 
-  <details class="collapse">
-    <summary class="collapse-summary">Best‑practice setup (prevents future popups)</summary>
-    <ul>
-      <li>Project folder structure: 
-        <code>Project\DWG</code>, <code>Project\Xrefs</code>, <code>Project\Images</code>.</li>
-      <li>Place the DWG at <code>Project\DWG</code>; attach xrefs/images from sibling folders → paths will be relative.</li>
-      <li>Set <code>REFPATHTYPE=2</code> in your template so new attachments are always relative.</li>
-      <li>When sharing, always use <code>ETRANSMIT</code> ZIP.</li>
-    </ul>
-  </details>
+            <details class="collapse">
+              <summary class="collapse-summary">Best‑practice setup (prevents future popups)</summary>
+              <ul>
+                <li>Project folder structure:
+                  <code>Project\DWG</code>, <code>Project\Xrefs</code>, <code>Project\Images</code>.
+                </li>
+                <li>Place the DWG at <code>Project\DWG</code>; attach xrefs/images from sibling folders → paths will be
+                  relative.</li>
+                <li>Set <code>REFPATHTYPE=2</code> in your template so new attachments are always relative.</li>
+                <li>When sharing, always use <code>ETRANSMIT</code> ZIP.</li>
+              </ul>
+            </details>
 
-  <p class="tip">Tip: If you move the project folder as a whole, relative links keep working—no repath needed.</p>
-</div>
+            <p class="tip">Tip: If you move the project folder as a whole, relative links keep working—no repath needed.
+            </p>
+          </div>
 
 
 
@@ -787,7 +805,8 @@
 
               <h3>Thaw Frozen Layers</h3>
               <p><code>LAYTHAW</code> restores (unfreezes) layers that were frozen with <code>LAYFRZ</code> or
-                <code>LAYISO</code>.</p>
+                <code>LAYISO</code>.
+              </p>
               <button class="copy" data-copy="LAYTHAW">Copy command: LAYTHAW</button>
 
               <h3>Turn All Layers On</h3>
@@ -1183,6 +1202,9 @@
         </ol>
       </section>
 
+
+
+
       <!-- ATTRIBUTES -->
       <section id="attributes" class="card" data-title="attributes">
         <h2>Attributes</h2>
@@ -1222,6 +1244,246 @@
           <li>Insert into each Layout and fill fields.</li>
         </ol>
       </section>
+
+
+      <!-- Card: Parameters (Variables) & Parameters Manager -->
+      <section id="parameters" class="card" data-title="parameters">
+        <h2>Parameters (Excel‑Style Variables) & Parameters Manager</h2>
+        <p>
+          Drive geometry by naming dimensions (e.g., <code>WIDTH</code>, <code>HEIGHT</code>) and editing them in one
+          place.
+          Change a value → the drawing updates automatically.
+        </p>
+
+        <details class="collapse" open>
+          <summary class="collapse-summary">Set up & use (step‑by‑step)</summary>
+
+          <ol>
+            <li><strong>Show Parametric tools</strong> (if hidden): Right‑click the ribbon tabs → <em>Show Tabs</em> →
+              enable <em>Parametric</em>.</li>
+            <li><strong>(Optional) Auto‑infer constraints:</strong> Command <code>CONSTRAINTINFER</code> → set to
+              <code>ON</code>.
+            </li>
+            <li><strong>Add geometric constraints</strong> (parallel, perpendicular, concentric): Command
+              <code>GEOMCONSTRAINT</code> and click the relationships to apply.
+            </li>
+            <li><strong>Add dimensional constraints</strong> (driving numbers): Command <code>DIMCONSTRAINT</code>, pick
+              the geometry, place the constraint.</li>
+            <li><strong>Open the control panel:</strong> Command <code>PARAMETERS</code> → the <em>Parameters
+                Manager</em> palette opens (dock/pin it like Layer Properties).</li>
+            <li><strong>Create variables:</strong> In Parameters Manager → <em>New</em> → add names & values (e.g.,
+              <code>WIDTH = 60</code>, <code>HEIGHT = 40</code>). You can use expressions like <code>R = WIDTH/2</code>.
+            </li>
+            <li><strong>Link dimensions to variables:</strong> Click a dimensional constraint’s value → type the
+              variable name (e.g., <code>WIDTH</code>) → Enter.</li>
+            <li><strong>Edit once, update everywhere:</strong> Change values in Parameters Manager and watch geometry
+              update.</li>
+          </ol>
+
+          <p class="muted">
+            Units tip: You can type unit‑qualified values in variables (e.g., <code>6mm</code>) and AutoCAD will convert
+            using your drawing units.
+            To force inches, append <code>"</code> (e.g., <code>0.25"</code>).
+          </p>
+
+          <div class="flex">
+            <button class="copy" data-copy="PARAMETERS">Copy: PARAMETERS</button>
+            <button class="copy" data-copy="GEOMCONSTRAINT">Copy: GEOMCONSTRAINT</button>
+            <button class="copy" data-copy="DIMCONSTRAINT">Copy: DIMCONSTRAINT</button>
+            <button class="copy" data-copy="CONSTRAINTINFER">Copy: CONSTRAINTINFER</button>
+            <button class="copy" data-copy="CONSTRAINTSETTINGS">Copy: CONSTRAINTSETTINGS</button>
+            <button class="copy" data-copy="SHOWCONSTRAINTS">Copy: SHOWCONSTRAINTS</button>
+            <button class="copy" data-copy="DELCONSTRAINT">Copy: DELCONSTRAINT</button>
+          </div>
+        </details>
+
+        <details class="collapse">
+          <summary class="collapse-summary">Dock / pin Parameters Manager</summary>
+          <ol>
+            <li>Run <code>PARAMETERS</code> to show the palette.</li>
+            <li>Drag the palette to a screen edge until it docks (you’ll see a highlight).</li>
+            <li>Click the push‑pin icon to keep it open persistently.</li>
+            <li>Right‑click the title → choose <em>Auto‑Hide</em> if you want it to slide out.</li>
+          </ol>
+        </details>
+
+        <details class="collapse">
+          <summary class="collapse-summary">Don’t see Parametric tools? (LT fallback)</summary>
+          <p>
+            If your AutoCAD LT build doesn’t include parametric constraints, you can still get “variable‑driven”
+            behavior using
+            <strong>Dynamic Blocks</strong>:
+          </p>
+          <ol>
+            <li>Open Block Editor: <code>BEDIT</code> → pick your block (or make one).</li>
+            <li>Add <em>Parameters</em> (e.g., Linear, Polar) and <em>Actions</em> (Stretch, Move).</li>
+            <li>Optionally add a <em>Lookup</em> table for preset sizes.</li>
+            <li>Save &amp; test: <code>ATTSYNC</code> if needed.</li>
+          </ol>
+          <div class="flex">
+            <button class="copy" data-copy="BEDIT">Copy: BEDIT</button>
+            <button class="copy" data-copy="ATTSYNC">Copy: ATTSYNC</button>
+          </div>
+        </details>
+      </section>
+
+
+      <!-- Card: Fix Gaps & Hatch a Closed Boundary -->
+      <section id="hatch" class="card" data-title="hatch">
+        <h2>Fix Gaps, Make a Closed Boundary, then Hatch</h2>
+        <p class="muted">Clean the linework → make a watertight loop → hatch it. Use these tools in order for the least
+          pain.</p>
+
+        <h3>1) Clean and Join the Linework</h3>
+        <ol>
+          <li><strong>Remove duplicates / tiny overlaps</strong><br>
+            Run <code>OVERKILL</code> → select the edges → <em>Enter</em> → keep defaults (or enable <em>Optimize
+              segments</em>).
+            <br><span class="muted">Removes stacked/overlapping bits that break hatches.</span>
+          </li>
+          <li><strong>Join into one polyline (with a fuzz)</strong><br>
+            <code>PEDIT</code> → <strong>M</strong> (Multiple) → select all lines/arcs → <em>Enter</em> →
+            <strong>J</strong> (Join) →
+            when asked for <em>fuzz distance</em>, enter something tiny (e.g., <code>0.01</code> inches or
+            <code>0.25</code> mm) → <em>Enter</em> →
+            <strong>C</strong> (Close) if needed.<br>
+            <span class="muted">Connects endpoints within that tolerance and merges arcs/lines into a single closed
+              polyline.</span>
+          </li>
+          <li><strong>Snap open corners shut (if needed)</strong><br>
+            <code>FILLET</code> → <strong>R</strong> → radius <code>0</code> → click the two edges at each open
+            corner.<br>
+            <span class="muted">Zero-radius fillet seals corners perfectly. Use <code>TRIM</code>/<code>EXTEND</code> if
+              things don’t meet, then re-<code>PEDIT</code> → <strong>J</strong>/<strong>C</strong>.</span>
+          </li>
+        </ol>
+        <p class="tip">Turn on OSNAP (F3) and ensure <em>Endpoint</em>/<em>Intersection</em> are active to avoid
+          creating new gaps.</p>
+
+        <h3>2) (Alternate) Auto-trace a Boundary</h3>
+        <p>If joining is messy: <code>BOUNDARY</code> → <em>Object type</em>: <strong>Polyline</strong> → <em>Pick
+            Points</em> inside the area → <em>Enter</em>.<br>
+          This creates a fresh, watertight polyline to hatch.</p>
+
+        <h3>3) Hatch It (with Gap Help if Needed)</h3>
+        <details class="collapse" open>
+          <summary class="collapse-summary">Two reliable ways</summary>
+          <div>
+            <h4>A) Hatch from the closed polyline (most robust)</h4>
+            <ol>
+              <li><code>HATCH</code> → <em>Select boundary objects</em> → click your closed polyline → <em>Enter</em>.
+              </li>
+            </ol>
+
+            <h4>B) Hatch by pick-point with gap tolerance</h4>
+            <ol>
+              <li>Set a small gap tolerance: <code>HPGAPTOL</code> = e.g., <code>0.01</code> (in) or <code>0.25</code>
+                (mm).</li>
+              <li>(Optional) Show gap markers: <code>HPGAPCOLOR</code> = a bright index (e.g., <code>1</code> = red).
+              </li>
+              <li><code>HATCH</code> → <em>Pick internal point</em> → click inside → <em>Enter</em>. If it fails, bump
+                <code>HPGAPTOL</code> slightly and retry.
+              </li>
+            </ol>
+          </div>
+        </details>
+
+        <h3>4) Make the Hatch Behave Nicely Later</h3>
+        <ul>
+          <li><strong>Associativity:</strong> set <code>HPASSOC = 1</code> so the hatch updates when you edit the
+            boundary.</li>
+          <li><strong>Layering:</strong> put it on a hatch layer (or preset <code>HPLAYER</code>).</li>
+          <li><strong>Edit later:</strong> use <code>HATCHEDIT</code> to tweak scale/pattern/associativity.</li>
+        </ul>
+
+        <h3>Quick Command Cheat-Sheet</h3>
+        <pre><code>OVERKILL      Remove duplicates/overlaps
+PEDIT (M→J)   Join edges with fuzz; C to close
+FILLET R=0    Snap open corners together
+BOUNDARY      Auto-trace a clean polyline
+HATCH         Create the hatch (object or pick point)
+HATCHEDIT     Edit existing hatch
+
+Vars: HPGAPTOL (gap tolerance), HPGAPCOLOR (gap marker color),
+      HPASSOC (hatch associativity), HPLAYER (default hatch layer)</code></pre>
+ 
+        <h2>Solid Hatch Shows Blank Areas (Even on Plot)</h2>
+        <p class="muted">Fixes for tiny 0.004" traces, dense vertices, and “ignored” corners when the boundary is fine
+          but the hatch doesn’t fully fill.</p>
+
+        <h3>1) Use a Clean, Simple Boundary</h3>
+        <ol>
+          <li><strong>OVERKILL</strong> the boundary sources (removes dups/overlaps).</li>
+          <li><strong>PEDIT</strong> → <strong>M</strong> (Multiple) → select segments → <strong>J</strong> (Join) →
+            give a tiny fuzz (e.g., <code>0.001</code>–<code>0.01</code> in) → <strong>C</strong> (Close) if needed.
+          </li>
+          <li>If still fussy: <strong>BOUNDARY</strong> → Object type: <em>Polyline</em> → <em>Pick Points</em> inside →
+            <em>Enter</em> (use this fresh polyline as your hatch boundary).
+          </li>
+        </ol>
+
+        <h3>2) Make the Hatch Ignore Micro-Islands</h3>
+        <ul>
+          <li>Set <code>HPISLANDDETECTION</code> = <strong>2</strong> (<em>Ignore</em> islands).<br><span
+              class="muted">Prevents tiny sliver “holes” created by ultra-thin traces from punching through the SOLID
+              fill.</span></li>
+          <li>(Ribbon) Hatch Creation → <em>Options</em> → Island detection: <strong>Ignore</strong>.</li>
+        </ul>
+
+        <h3>3) Raise Hatch Complexity Limits</h3>
+        <ul>
+          <li>Set <code>HPMAXAREAS</code> high (e.g., <strong>25000</strong>).<br><span class="muted">Allows more
+              separate hatch sub-areas before AutoCAD stops processing them.</span></li>
+          <li>(Pattern hatches only) If you later use line-based patterns, also bump <code>HPMAXLINES</code> (e.g.,
+            <strong>2000000</strong>).
+          </li>
+        </ul>
+
+        <h3>4) Ensure Fills Actually Plot/Display</h3>
+        <ul>
+          <li><code>FILLMODE</code> = <strong>1</strong> → <strong>REGENALL</strong>.<br><span class="muted">Global
+              switch for showing/plotting fills and solids.</span></li>
+          <li>Hatch <em>Transparency</em> = 0 (or make sure “Plot transparency” is enabled when plotting).</li>
+        </ul>
+
+        <h3>5) Recreate the Hatch the Robust Way</h3>
+        <ol>
+          <li>Delete the glitchy hatch (keep the polyline boundary).</li>
+          <li><strong>HATCH</strong> → set <em>Island detection</em> to <strong>Ignore</strong> → <em>Select boundary
+              objects</em> → click the single closed polyline → <em>Enter</em>.</li>
+          <li>Set <code>HPASSOC</code> = <strong>1</strong> so it stays linked to the boundary.</li>
+        </ol>
+
+        <h3>6) Fix Draw-Order Conflicts</h3>
+        <ul>
+          <li>Select hatch → <strong>Draw Order</strong> → <em>Bring to Front</em> (or send under linework if desired).
+          </li>
+          <li>Watch for <em>images/wipeouts/masks</em> above the hatch—those can create apparent blank spots.</li>
+        </ul>
+
+        <h3>7) Last-Resort Geometry Tricks (for ultra-thin 0.004" detail)</h3>
+        <ul>
+          <li><strong>OFFSET</strong> the boundary outward by a hair (e.g., <code>0.001</code>–<code>0.002</code> in) to
+            remove micro-slivers, then hatch that copy.</li>
+          <li>Convert boundary to <strong>REGION</strong> → fix self-intersections with
+            <strong>UNION</strong>/<strong>SUBTRACT</strong> → hatch the region.
+          </li>
+        </ul>
+
+        <h3>Quick Vars/Commands</h3>
+        <pre><code>OVERKILL, PEDIT (M→J→C), BOUNDARY, HATCH, HATCHEDIT
+HPISLANDDETECTION = 2   (Ignore)
+HPMAXAREAS = 25000      (or higher)
+FILLMODE = 1            (then REGENALL)
+HPASSOC = 1             (associative hatch)
+[Draw Order] Bring to Front / Send to Back</code></pre>
+
+        <p class="tip">If you still see holes on the plotted PDF only, try plotting with “<em>Plot transparency</em>” ON
+          (if you used transparency) and ensure your PDF driver is <em>DWG To PDF.pc3</em>. Re-test after
+          <strong>REGENALL</strong>.
+        </p>
+      </section>
+
 
       <!-- SHEET SET MANAGER -->
       <section id="sheet-set" class="card" data-title="sheet set manager">
