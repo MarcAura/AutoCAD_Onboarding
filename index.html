@@ -1406,7 +1406,7 @@ HATCHEDIT     Edit existing hatch
 
 Vars: HPGAPTOL (gap tolerance), HPGAPCOLOR (gap marker color),
       HPASSOC (hatch associativity), HPLAYER (default hatch layer)</code></pre>
- 
+
         <h2>Solid Hatch Shows Blank Areas (Even on Plot)</h2>
         <p class="muted">Fixes for tiny 0.004" traces, dense vertices, and “ignored” corners when the boundary is fine
           but the hatch doesn’t fully fill.</p>
@@ -1482,7 +1482,101 @@ HPASSOC = 1             (associative hatch)
           (if you used transparency) and ensure your PDF driver is <em>DWG To PDF.pc3</em>. Re-test after
           <strong>REGENALL</strong>.
         </p>
+
+
+        <h2>HATCH HEALING & FIXING BLANK AREAS</h2>
+        <h3>Purpose</h3>
+        <p>If your hatch fills only part of a closed polyline, or leaves blank spots even though the boundary looks
+          fine, use these steps to rebuild or clean the boundary so hatching works correctly.</p>
+
+
+        <h3>Method 1: Rebuild Boundary as REGION</h3>
+        <ol>
+          <li>Select closed polyline → run <code>REGION</code> (creates watertight boundary).</li>
+          <li>If it errors, fix intersections: <code>PEDIT</code> / <code>FILLET R=0</code> / <code>TRIM</code> as
+            needed, then retry.</li>
+          <li>Re-hatch: <code>HATCH</code> → Select boundary objects → choose REGION → SOLID.</li>
+        </ol>
+
+
+        <h3>Method 2: Force a Chunkier Boundary</h3>
+        <ol>
+          <li>Duplicate the boundary.</li>
+          <li><code>OFFSET</code> outward by 0.001 in (or inward if gaps are internal).</li>
+          <li>Hatch the offset copy → erase the original if needed.</li>
+          <li>This helps eliminate tiny islands that confuse hatching.</li>
+        </ol>
+
+
+        <h3>Method 3: Simplify Extreme Vertex Counts</h3>
+        <ol>
+          <li>Run <code>OVERKILL</code> (check “Combine co-linear”).</li>
+          <li>Then use <code>PEDIT</code> → Straighten (S) or Fit/Spline.</li>
+          <li>Re-hatch → fewer noisy vertices = fewer problems.</li>
+        </ol>
+
+
+        <h3>Method 4: Plot as Raster</h3>
+        <ol>
+          <li>Plot with <code>DWG To PDF.pc3</code>.</li>
+          <li>In Plot dialog → Printer/Plotter → Properties → bump raster resolution → enable Plot Transparency.</li>
+          <li>This forces raster output for hatch → often removes “holes” in PDF/print.</li>
+        </ol>
+
+
+        <h3>Method 5: Draw Order + Overlay Checks</h3>
+        <ul>
+          <li>Select hatch → <strong>Draw Order → Bring to Front</strong> (or Send Under if needed).</li>
+          <li>Temporarily turn off images, wipeouts, or masks to see if they cause gaps.</li>
+        </ul>
+
+
+        <h3>Quick Commands</h3>
+        <ul>
+          <li><code>REGION</code> → rebuild boundary</li>
+          <li><code>OFFSET</code> → nudge copy to heal gaps</li>
+          <li><code>OVERKILL</code> → clean duplicates</li>
+          <li><code>PEDIT</code> → simplify polyline</li>
+          <li><code>HATCH</code> → create hatch</li>
+          <li><code>HATCHEDIT</code> → adjust hatch</li>
+        </ul>
       </section>
+
+
+
+
+      <section class="appendix" id="appendix-hatch-advanced">
+        <h2>APPENDIX D2: Advanced Hatch Fill Fixes (Blank Spots)</h2>
+        <p>Use these when a hatch leaves unexpected empty areas even though the boundary looks closed.
+          <strong>FYI:</strong> In your case, <code>OVERKILL</code> resolved it—great call.</p>
+
+
+        <h3>1) Rebuild the boundary as a REGION, then re‑hatch</h3>
+        <ol>
+          <li>Select your closed polyline → run <code>REGION</code> (creates a mathematically “watertight” boundary).
+          </li>
+          <li>If REGION errors, you likely have a self‑intersection. Fix with <code>PEDIT</code> / <code>FILLET</code>
+            <em>R=0</em> / <code>TRIM</code>, then try <code>REGION</code> again.</li>
+          <li>Hatch the REGION: <code>HATCH</code> → Select boundary objects → pick the region → choose
+            <strong>SOLID</strong>.</li>
+        </ol>
+
+
+        <h3>2) Force a “chunkier” boundary to eliminate micro‑slivers</h3>
+        <ol>
+          <li>Make a duplicate of your boundary.</li>
+          <li><code>OFFSET</code> outward by a hair (e.g., <strong>0.001 in</strong>) → hatch the <em>offset copy</em> →
+            then erase the original.</li>
+          <li>If the missing areas are internal, try offsetting <em>inward</em> instead.</li>
+          <li>This often bulldozes tiny islands the solver interprets as holes.</li>
+        </ol>
+
+
+        <h3>3) Simplify extreme vertex counts</h3>
+        <ol>
+          <li>Run <code>OVERKILL</code> (enable <em>Combine co‑linear</em>).</li>
+      </section>
+
 
 
       <!-- SHEET SET MANAGER -->
