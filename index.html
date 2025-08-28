@@ -1805,6 +1805,165 @@ color-8mil.ctb</pre>
         </details>
       </section>
 
+
+<!-- Card: Convert Text to Attribute (Inside a Block) -->
+<div class="card">
+  <h2>Convert Text to an Attribute (in a Block)</h2>
+  <p class="muted">You don’t “convert” TEXT/MTEXT directly—you replace it with an <em>Attribute Definition</em> inside the block, then sync.</p>
+  <ol>
+    <li><strong>If text is already in a block:</strong> Select block → <code>BEDIT</code> (opens Block Editor).<br>
+        <strong>If it’s loose text:</strong> Select border + text → <code>BLOCK</code> → name it (e.g. <em>TITLE_BLOCK</em>) → OK → <code>BEDIT</code>.
+    </li>
+    <li>Note the current string (e.g., “REV A”), then delete the old TEXT/MTEXT object.</li>
+    <li>Type <code>ATTDEF</code>:
+      <ul>
+        <li><strong>Tag</strong>: short unique name (e.g., <code>REV</code>, <code>PROJECT</code>, <code>DATE</code>)</li>
+        <li><strong>Prompt</strong>: what you’ll be asked when editing</li>
+        <li><strong>Default</strong>: starting value (use the old text if you want)</li>
+      </ul>
+      Place the attribute where the text was.
+    </li>
+    <li>Save &amp; close Block Editor → back in drawing, run <code>ATTSYNC</code> → select the block → <em>Yes</em> to update all inserts.</li>
+  </ol>
+  <div class="flex">
+    <button class="copy" data-copy="BEDIT">Copy: BEDIT</button>
+    <button class="copy" data-copy="BLOCK">Copy: BLOCK</button>
+    <button class="copy" data-copy="ATTDEF">Copy: ATTDEF</button>
+    <button class="copy" data-copy="ATTSYNC">Copy: ATTSYNC</button>
+  </div>
+</div>
+
+<!-- Card: Edit Attributes (EATTEDIT) -->
+<div class="card">
+  <h2>Edit Block Attributes (Enhanced Attribute Editor)</h2>
+  <ol>
+    <li>Double-click a placed block that has attributes.</li>
+    <li>Enhanced Attribute Editor opens (<code>EATTEDIT</code>):
+      <ul>
+        <li>Change values (e.g., <strong>REV</strong>, <strong>PROJECT</strong>, <strong>DATE</strong>).</li>
+        <li>Optionally tweak text style/justification/visibility per attribute.</li>
+      </ul>
+    </li>
+    <li>Click <em>OK</em>. If you changed the block definition later, run <code>ATTSYNC</code> to push updates to all inserts.</li>
+  </ol>
+  <p class="muted">Batch/advanced control: use <code>BATTMAN</code> (Block Attribute Manager) to reorder, lock, or set attribute properties for the definition.</p>
+  <div class="flex">
+    <button class="copy" data-copy="EATTEDIT">Copy: EATTEDIT</button>
+    <button class="copy" data-copy="ATTSYNC">Copy: ATTSYNC</button>
+    <button class="copy" data-copy="BATTMAN">Copy: BATTMAN</button>
+  </div>
+</div>
+
+<!-- Card: Auto-Updating REV via Fields / Sheet Set -->
+<div class="card">
+  <h2>Keep All Blocks in Sync: Link Attributes → Field / Sheet Set</h2>
+  <p><strong>Goal:</strong> Make every title block show the same REV automatically. Use a Field inside the attribute that reads a single source (Sheet Set property or drawing property). Then you update once → all sheets follow.</p>
+
+  <details class="collapse" open>
+    <summary class="collapse-summary">Link to Sheet Set (preferred for multi-sheet projects)</summary>
+    <ol>
+      <li>Create/open your Sheet Set: <code>SHEETSET</code> → new or existing .DST.</li>
+      <li><strong>In Block Editor</strong> (<code>BEDIT</code>) select the REV attribute → right-click → <em>Insert Field…</em>.</li>
+      <li>In the Field dialog:
+        <ul>
+          <li><strong>Category</strong>: SheetSet</li>
+          <li><strong>Field names</strong>: <em>CurrentSheetRevision</em> (or a custom Sheet Set property)</li>
+          <li>Confirm formatting, then OK.</li>
+        </ul>
+      </li>
+      <li>Save &amp; close Block Editor → <code>ATTSYNC</code> the block.</li>
+      <li>To change REV for <em>every</em> sheet: <code>SHEETSET</code> → Sheet Set <em>Properties</em> → edit <strong>CurrentSheetRevision</strong> → <code>REGENALL</code>.</li>
+    </ol>
+  </details>
+
+  <details class="collapse">
+    <summary class="collapse-summary">Link to Drawing Properties (single DWG)</summary>
+    <ol>
+      <li><code>DWGPROPS</code> → <em>Custom</em> tab → add a property (e.g., <strong>REV</strong> = A).</li>
+      <li>In Block Editor, select the REV attribute → <em>Insert Field…</em>.</li>
+      <li>Field <strong>Category</strong>: <em>Objects</em> or <em>Other</em> (varies) → choose <strong>Document</strong> / <strong>Custom</strong> property → pick <strong>REV</strong>.</li>
+      <li>OK → Save → <code>ATTSYNC</code>. Now changing <code>DWGPROPS</code> → REV updates all inserts in that file.</li>
+    </ol>
+  </details>
+
+  <p class="tip"><strong>Important:</strong> Attributes are <em>instance-based</em> by default (each block can have a different value). That’s great for sheet titles or dates. For a <em>global</em> value (like REV that must match across all pages), link the attribute to a Field that reads one central property (Sheet Set or Drawing Property).</p>
+
+  <div class="flex">
+    <button class="copy" data-copy="SHEETSET">Copy: SHEETSET</button>
+    <button class="copy" data-copy="BEDIT">Copy: BEDIT</button>
+    <button class="copy" data-copy="ATTSYNC">Copy: ATTSYNC</button>
+    <button class="copy" data-copy="REGENALL">Copy: REGENALL</button>
+    <button class="copy" data-copy="DWGPROPS">Copy: DWGPROPS</button>
+  </div>
+</div>
+
+
+<!-- Card: Auto Page Numbers (Attributes + Fields) -->
+<section class="card" id="auto-page-numbers">
+  <h2>Auto Page Numbers in Title Block</h2>
+  <p class="muted">Use Attributes + Fields so each Layout shows the correct page number automatically.</p>
+
+  <h3>Option 1 — Use Layout Tab Name (Fast)</h3>
+  <ol>
+    <li>Open your title block in Block Editor: <code>BEDIT</code> → pick the title block.</li>
+    <li>Make/choose an attribute for the sheet number (e.g., <code>SHEET_NO</code>).</li>
+    <li>In the attribute’s <em>Default</em> box: right-click → <strong>Insert Field…</strong> → 
+      Category: <em>Other</em> → Field name: <em>System Variable</em> → Variable: <code>CTAB</code> → OK.</li>
+    <li><code>ATTSYNC</code> to push changes to placed blocks.</li>
+    <li>Rename each Layout tab to the desired number (e.g., <em>1</em>, <em>2</em>, <em>3</em>).</li>
+  </ol>
+  <div class="flex">
+    <button class="copy" data-copy="BEDIT">Copy: BEDIT</button>
+    <button class="copy" data-copy="ATTSYNC">Copy: ATTSYNC</button>
+  </div>
+
+  <h3>Option 2 — Sheet Set Manager (Best for Projects)</h3>
+  <ol>
+    <li>Open <code>SHEETSET</code> → create/open your Sheet Set → add all layouts as sheets.</li>
+    <li><code>BEDIT</code> the title block → select (or create) an attribute (e.g., <code>SHEET_NO</code>).</li>
+    <li>Right-click in attribute <em>Default</em> → <strong>Insert Field…</strong> → 
+      Category: <em>SheetSet</em> → Field: <em>CurrentSheetNumber</em> → OK.</li>
+    <li><code>ATTSYNC</code> to update instances.</li>
+    <li>Reorder sheets in the Sheet Set; numbers update automatically.</li>
+  </ol>
+  <div class="flex">
+    <button class="copy" data-copy="SHEETSET">Copy: SHEETSET</button>
+    <button class="copy" data-copy="BEDIT">Copy: BEDIT</button>
+    <button class="copy" data-copy="ATTSYNC">Copy: ATTSYNC</button>
+  </div>
+
+  <details class="collapse">
+    <summary class="collapse-summary">Bonus: “Page X of Y”</summary>
+    <ol>
+      <li>Add an attribute for page label (e.g., <code>SHEET_LABEL</code>) in your title block.</li>
+      <li>In the <em>Default</em> box, type <code>Page </code>, then Insert Field → 
+        <em>SheetSet</em> → <em>CurrentSheetNumber</em>, then type <code> of </code>, then Insert Field → 
+        <em>SheetSet</em> → <em>TotalSheets</em> → OK.</li>
+      <li><code>ATTSYNC</code> to push updates.</li>
+    </ol>
+    <p class="muted">Works only with a Sheet Set (Option 2), since it supplies <em>TotalSheets</em>.</p>
+  </details>
+
+  <h3>Option 3 — Manual Attribute (Simple)</h3>
+  <ol>
+    <li>Define an attribute (e.g., <code>SHEET_NO</code>) in the title block via <code>BEDIT</code>.</li>
+    <li>When placing on each layout, type the number manually (1, 2, 3…).</li>
+    <li><code>ATTSYNC</code> if you later tweak the block definition.</li>
+  </ol>
+
+  <details class="collapse">
+    <summary class="collapse-summary">Tips</summary>
+    <ul>
+      <li><strong>Formatting:</strong> In Field dialog, click <em>Additional Format</em> to add prefixes/suffixes or leading zeros.</li>
+      <li><strong>Keep attributes consistent:</strong> Use the same tag names across all sheets (e.g., <code>SHEET_NO</code>, <code>REV</code>, <code>SHEET_LABEL</code>).</li>
+      <li><strong>Sync after edits:</strong> Always run <code>ATTSYNC</code> after changing the block definition.</li>
+    </ul>
+  </details>
+</section>
+
+
+
+
       <!-- BENEFITS SUMMARY -->
       <section id="benefits" class="card" data-title="benefits">
         <h2>Benefits Summary</h2>
